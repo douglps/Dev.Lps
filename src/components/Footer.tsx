@@ -18,7 +18,6 @@ import {
   StyledLink,
 } from "@/src/styles/FooterStyled"; // Importe os componentes estilizados
 
-import linkedinIcon from "@/images/socials/linkedin.svg";
 import emailIconDark from "@/images/socials/email-br.svg";
 import emailIconLight from "@/images/socials/email-pr.svg";
 import githubIconDark from "@/images/utils/github-br.svg";

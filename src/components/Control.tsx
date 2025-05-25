@@ -1,6 +1,6 @@
 "use client"; // Indica que este é um componente cliente
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "@/src/contexts/ThemeContext";
@@ -61,15 +61,6 @@ export function Control() {
       setIsOpen(false);
     }
   };
-
-  useEffect(() => {
-    if (typeof window === "undefined") return; // Garante que o event listener só seja adicionado no cliente
-
-    window.addEventListener("scroll", closeMenu);
-    return () => {
-      window.removeEventListener("scroll", closeMenu);
-    };
-  }, [isOpen]); // Dependência em isOpen para re-adicionar/remover o listener se isOpen mudar
 
   return (
     <Container>

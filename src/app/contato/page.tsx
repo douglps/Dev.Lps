@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image"; // Pode ser removido se StyledSocialsContato e StyledCopyIcon forem importados de ContatoStyled
+
 import { useTheme } from "@/src/contexts/ThemeContext";
 
 import { FormularioContato } from "@/src/components/FormularioContato";

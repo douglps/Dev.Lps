@@ -8,7 +8,6 @@ import {
   StyledContainerForm,
   StyledInfoForm,
   StyledFormContato,
-  StyledEmailPopupEmailBox, // Exemplo, se EmailPopup fosse mesclado
 } from "@/src/styles/ContatoStyled"; // Ajuste o caminho conforme a localização real
 
 interface FormularioContatoProps {
@@ -44,7 +43,9 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export function FormularioContato({ semMargin = false }: FormularioContatoProps) {
+export function FormularioContato({
+  semMargin = false,
+}: FormularioContatoProps) {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -158,7 +159,9 @@ export function FormularioContato({ semMargin = false }: FormularioContatoProps)
 
   return (
     <StyledContainerForm>
-      <StyledInfoForm $noMargin={semMargin}>* Campos Obrigatórios</StyledInfoForm>
+      <StyledInfoForm $noMargin={semMargin}>
+        * Campos Obrigatórios
+      </StyledInfoForm>
       <StyledFormContato
         onSubmit={handleSubmit(onSubmit)}
         noValidate

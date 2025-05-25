@@ -281,11 +281,7 @@ export default function CafePage() {
                     <Image
                       src={copyIcon}
                       // Linha 299 e 300: Aspas escapadas
-                      alt={
-                        copiaColaButtonText === "Copiado!"
-                          ? "Código copiado"
-                          : "Clique para copiar o código Pix Copia e Cola"
-                      }
+                      alt="Copiar/Copiado"
                       width={COPY_BUTTON}
                       height={COPY_BUTTON}
                     />
@@ -338,11 +334,7 @@ export default function CafePage() {
                     <Image
                       src={copyIcon}
                       // Linha 354 e 355: Aspas escapadas
-                      alt={
-                        chavePixButtonText === "Copiado!"
-                          ? "Chave copiada"
-                          : "Clique para copiar a chave Pix"
-                      }
+                      alt="Copiar/Copiado"
                       width={COPY_BUTTON}
                       height={COPY_BUTTON}
                     />

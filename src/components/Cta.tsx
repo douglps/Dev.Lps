@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Modal from "@/src/components/ModalCta";
 import { FormularioContato } from "@/src/components/FormularioContato";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const CtaSection = styled.section`
 margin: 2rem 0;`

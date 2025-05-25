@@ -44,9 +44,3 @@ interface MyTheme {
   //   lg: string;
   // };
 }
-
-// 2. Agora, estenda a interface DefaultTheme do styled-components
-// Isso informa ao TypeScript que o seu "DefaultTheme" terá a estrutura de MyTheme
-declare module "styled-components" {
-  export interface DefaultTheme extends MyTheme {}
-}
