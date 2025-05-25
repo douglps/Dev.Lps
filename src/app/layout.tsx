@@ -15,6 +15,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import StyledComponentsRegistry from "./registry";
 
+// IMPORTAÇÃO DO COMPONENTE SCRIPT AQUI
+import Script from "next/script";
+
 const lato = Lato({
   weight: ["100", "400", "700"],
   style: ["normal", "italic"],
@@ -43,6 +46,24 @@ export default function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <ThemeProvider>
+            {/* SCRIPTS DO GOOGLE ANALYTICS INSERIDOS AQUI USANDO next/script
+              A estratégia "afterInteractive" é comum para GA e garante que o script
+              seja carregado e executado após a hidratação da página.
+            */}
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-L7QMN988BD"
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'G-L7QMN988BD');
+              `}
+            </Script>
+
             <GlobalStyle />
             <Header />
             <Control />
