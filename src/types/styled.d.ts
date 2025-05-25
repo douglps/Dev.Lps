@@ -1,5 +1,5 @@
 // styled.d.ts
-import 'styled-components'; // Importa o módulo styled-components para estender seus tipos
+import "styled-components"; // Importa o módulo styled-components para estender seus tipos
 
 // 1. Primeiro, defina a interface do SEU objeto de tema
 // Esta interface deve corresponder exatamente à estrutura do objeto que você passa para o ThemeProvider
@@ -18,9 +18,9 @@ interface MyTheme {
     fundoSkills: string;
     fundoSkillsIcons: string;
     fundoModal: string;
-};
+  };
 
-shadows: {
+  shadows: {
     fundoShadow: string;
     letrasShadow: string;
     skillsShadow: string;
@@ -28,16 +28,15 @@ shadows: {
     fundoPortifolio: string;
     fundoMenu: string;
   };
-  
+
   filters: {
     fundoBlur: string;
-    
   };
 
   bgimages: {
     bgPages: string;
     bgPortifolio: string;
-  }
+  };
   // Adicione outras seções do tema aqui (ex: breakpoints, typography, spacing)
   // breakpoints: {
   //   sm: string;
@@ -48,7 +47,6 @@ shadows: {
 
 // 2. Agora, estenda a interface DefaultTheme do styled-components
 // Isso informa ao TypeScript que o seu "DefaultTheme" terá a estrutura de MyTheme
-declare module 'styled-components' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+declare module "styled-components" {
   export interface DefaultTheme extends MyTheme {}
 }

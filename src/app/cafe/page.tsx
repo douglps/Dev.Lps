@@ -157,13 +157,10 @@ export default function CafePage() {
         <link rel="canonical" href="https://digigram-ten.vercel.app/cafe" />
       </Head>
       <S.ContainerPix>
-        {" "}
         {/* Antiga .container--pix */}
         <S.FundoPix>
-          {" "}
           {/* Antiga .fundo-pix */}
           <S.QueroCafe>
-            {" "}
             {/* Antiga .quero-cafe */}
             <p>Upload de Cafeína 🚀</p>
             <p>
@@ -174,7 +171,6 @@ export default function CafePage() {
             </p>
           </S.QueroCafe>
           <S.AvisoPix>
-            {" "}
             {/* Antiga .aviso-pix */}
             <p>
               A contribuição pode ser feita através de Pix. Escolha como
@@ -182,7 +178,6 @@ export default function CafePage() {
             </p>
           </S.AvisoPix>
           <S.DadosPix>
-            {" "}
             {/* Antiga .dados-pix */}
             <S.PixLogo>
               <Image
@@ -194,7 +189,6 @@ export default function CafePage() {
             </S.PixLogo>
             {/* Gatilho QR Code */}
             <S.PixOption onClick={openQrCode}>
-              {" "}
               {/* Antiga .qr */}
               <p>QR Code</p>
               <Image
@@ -206,7 +200,6 @@ export default function CafePage() {
             </S.PixOption>
             {/* Gatilho Copia e Cola */}
             <S.PixOption onClick={openCopiaCola}>
-              {" "}
               {/* Antiga .copia-cola */}
               <p>Copia e Cola</p>
               <Image
@@ -218,7 +211,6 @@ export default function CafePage() {
             </S.PixOption>
             {/* Gatilho Chave Pix */}
             <S.PixOption onClick={openChavePix}>
-              {" "}
               {/* Antiga .chave */}
               <p>Chave Pix</p>
               <Image
@@ -233,7 +225,6 @@ export default function CafePage() {
               <S.ModalOverlay onClick={closeQrCode}>
                 <S.QRCodeContainer onClick={handleModalContentClick}>
                   <S.FecharButton onClick={closeQrCode}>
-                    {" "}
                     {/* Antiga .fechar */}
                     <Image
                       src={closeIcon}
@@ -273,7 +264,6 @@ export default function CafePage() {
               <S.ModalOverlay onClick={closeCopiaCola}>
                 <S.PixCopiaColaContainer onClick={handleModalContentClick}>
                   <S.FecharButton onClick={closeCopiaCola}>
-                    {" "}
                     {/* Antiga .fechar */}
                     <Image
                       src={closeIcon}
@@ -287,7 +277,7 @@ export default function CafePage() {
                       handleCopy(pixCopiaColaCode, setCopiaColaButtonText)
                     }
                   >
-                    {copiaColaButtonText}{" "}
+                    {copiaColaButtonText}
                     <Image
                       src={copyIcon}
                       alt={
@@ -299,7 +289,7 @@ export default function CafePage() {
                       height={COPY_BUTTON}
                     />
                   </S.CopiarButton>
-                  <S.CodCopia>{pixCopiaColaCode}</S.CodCopia>{" "}
+                  <S.CodCopia>{pixCopiaColaCode}</S.CodCopia>
                   {/* Antiga .cod-copia */}
                   <S.PassoQR>
                     <ol>
@@ -330,7 +320,6 @@ export default function CafePage() {
               <S.ModalOverlay onClick={closeChavePix}>
                 <S.ChavePixContainer onClick={handleModalContentClick}>
                   <S.FecharButton onClick={closeChavePix}>
-                    {" "}
                     {/* Antiga .fechar */}
                     <Image
                       src={closeIcon}
@@ -344,7 +333,7 @@ export default function CafePage() {
                       handleCopy(pixChaveKey, setChavePixButtonText)
                     }
                   >
-                    {chavePixButtonText}{" "}
+                    {chavePixButtonText}
                     <Image
                       src={copyIcon}
                       alt={
