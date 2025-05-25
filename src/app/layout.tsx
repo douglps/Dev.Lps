@@ -3,14 +3,18 @@
 
 import type { Metadata } from "next"; // Importe Metadata
 import { Lato } from "next/font/google"; // Importe a fonte
-import GlobalStyle from '@/src/styles/GlobalStyle';
+import GlobalStyle from "@/src/styles/GlobalStyle";
 import { Header } from "@/src/components/Header";
 import { Control } from "@/src/components/Control";
 import { Footer } from "@/src/components/Footer";
 
 import { ThemeProvider } from "@/src/contexts/ThemeContext";
 
-import StyledComponentsRegistry from "./registry"; 
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
+import StyledComponentsRegistry from "./registry";
+
 const lato = Lato({
   weight: ["100", "400", "700"],
   style: ["normal", "italic"],
@@ -24,6 +28,9 @@ export const metadata: Metadata = {
   title: "DevLps | Portifólio de Douglas Lopes",
   description:
     "Explore o portifólio digital de Douglas Lopes — desenvolvedor web focado em design funcional, performance e criatividade.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -37,10 +44,12 @@ export default function RootLayout({
         <StyledComponentsRegistry>
           <ThemeProvider>
             <GlobalStyle />
-              <Header />
-              <Control />
-              {children}
-              <Footer />
+            <Header />
+            <Control />
+            {children}
+            <Footer />
+            <SpeedInsights />
+            <Analytics />
           </ThemeProvider>
         </StyledComponentsRegistry>
       </body>

@@ -141,7 +141,7 @@ export const AvisoPix = styled.div`
 
   text-align: left;
   p {
-  text-indent: 3rem;
+    text-indent: 3rem;
     margin-bottom: 1rem;
   }
 
@@ -155,6 +155,7 @@ export const AvisoPix = styled.div`
 
 export const DadosPix = styled.div`
   display: flex;
+  justify-content: center;
   flex-direction: row;
   gap: 2rem; /* Usando gap para espaçamento */
   align-items: center; /* Alinhando os itens verticalmente */
