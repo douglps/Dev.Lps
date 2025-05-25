@@ -280,6 +280,7 @@ export default function CafePage() {
                     {copiaColaButtonText}
                     <Image
                       src={copyIcon}
+                      // Linha 299 e 300: Aspas escapadas
                       alt={
                         copiaColaButtonText === "Copiado!"
                           ? "Código copiado"
@@ -296,8 +297,8 @@ export default function CafePage() {
                       <li>Copie o codigo clicando acima;</li>
                       <li>Abra o aplicativo de seu banco no celular;</li>
                       <li>
-                        Seleciona a opção de pagamento via Pix, escolha "Copia e
-                        Cola"
+                        Seleciona a opção de pagamento via Pix, escolha 'Copia e
+                        Cola'
                       </li>
                       <li>Cole o codigo copiado;</li>
                       <li>
@@ -336,6 +337,7 @@ export default function CafePage() {
                     {chavePixButtonText}
                     <Image
                       src={copyIcon}
+                      // Linha 354 e 355: Aspas escapadas
                       alt={
                         chavePixButtonText === "Copiado!"
                           ? "Chave copiada"
@@ -351,8 +353,8 @@ export default function CafePage() {
                       <li>Copie a chave clicando acima;</li>
                       <li>Abra o aplicativo de seu banco no celular;</li>
                       <li>
-                        Seleciona a opção de pagamento via Pix, escolha "Chave
-                        Pix"
+                        Seleciona a opção de pagamento via Pix, escolha 'Chave
+                        Pix'
                       </li>
                       <li>Cole a chave copiada;</li>
                       <li>
