@@ -8,8 +8,6 @@ import styled, { css } from "styled-components";
 import copyIcon from "@/images/utils/copy.svg";
 import closeIcon from "@/images/utils/close.svg";
 
-const copySize = 20;
-
 interface EmailPopupProps {
   icon: string;
   tipo?: "contato" | "footer";
