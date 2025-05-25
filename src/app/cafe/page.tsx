@@ -280,6 +280,11 @@ export default function CafePage() {
                     {copiaColaButtonText}
                     <Image
                       src={copyIcon}
+                      alt={
+                        chavePixButtonText === "Copiado!"
+                          ? "Chave copiada"
+                          : "Clique para copiar a chave Pix"
+                      }
                       width={COPY_BUTTON}
                       height={COPY_BUTTON}
                     />

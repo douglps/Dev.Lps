@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 
 import { useEffect } from "react";
 
@@ -13,7 +13,6 @@ import { Skills } from "@/src/components/Skills";
 import { ElevatorPitch } from "@/src/components/ElevatorPitch";
 import { MeuPortfolio } from "@/src/components/MeuPortifolio";
 
-
 // Componente ThemeInitializer
 function ThemeInitializer() {
   useEffect(() => {
@@ -22,25 +21,19 @@ function ThemeInitializer() {
   return null;
 }
 
-
-export default function Home({
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Home() {
   return (
     // Note que <html> e <body> não estão aqui, pois estarão no layout do servidor.
     // Você não precisa repetir as classes da fonte aqui se elas estiverem no <html> do Server Component.
     <>
-      
-        <ThemeInitializer />
-        <Hero />
-        <Cta />
-        <Terminal />
-        <Skills />
-        <ElevatorPitch />
-        <MeuPortfolio />
-        <Cta />
-      
+      <ThemeInitializer />
+      <Hero />
+      <Cta />
+      <Terminal />
+      <Skills />
+      <ElevatorPitch />
+      <MeuPortfolio />
+      <Cta />
     </>
   );
 }
