@@ -3,14 +3,33 @@ import type { Metadata } from "next";
 import "@/src/styles/globals.css"; // Se você usa globals.css aqui, ok.
 
 export const metadata: Metadata = {
-  // O título aqui sobrescreve o do layout raiz para a rota /cafe
-  // ou pode ser omitido para herdar do layout raiz e ser sobrescrito pelo page.tsx
-  // Se quiser um título específico para a seção "cafe" (ex: "DevLps | Café"), defina-o aqui.
-  // Caso contrário, pode removê-lo para que o `page.tsx` defina o título final.
-  title: "DevLps | Seção Café", // Exemplo se quisesse um título diferente para a seção
-  description:
-    "Apoie o desenvolvimento e os conteúdos do DevLps contribuindo com um café.",
-  // Outras tags como icons, themeColor, etc., podem ser definidas aqui se forem específicas para a seção /cafe
+  title: "Contribua com um café ☕ | DevLps", // Este título final será usado para /cafe
+  description: "Ajude com um café e apoie novos projetos.", // Esta descrição final será usada para /cafe
+  openGraph: {
+    title: "Contribua com um café ☕ | DevLps",
+    description: "Ajude com um café e apoie novos projetos.",
+    url: "https://devlps.vercel.app/cafe",
+    images: [
+      {
+        url: "https://devlps.vercel.app/og-images/thumbCafe.avif",
+        width: 1200,
+        height: 630,
+        alt: "Imagem de compartilhamento para a página de café",
+      },
+    ],
+    type: "website",
+    siteName: "DevLps", // Se quiser o nome do site aqui
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contribua com um café ☕ | DevLps",
+    description: "Ajude com um café e apoie novos projetos.",
+    images: ["https://devlps.vercel.app/og-images/thumbCafe.avif"],
+    // creator: "@seu_usuario_twitter",
+  },
+  alternates: {
+    canonical: "https://devlps.vercel.app/cafe",
+  },
 };
 
 export default function CafeLayout({

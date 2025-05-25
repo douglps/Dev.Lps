@@ -3,11 +3,35 @@ import "@/src/styles/globals.css";
 
 import type { Metadata } from "next";
 
-// Opcional: Se você quiser um título de seção para toda a rota /contato
 export const metadata: Metadata = {
-  title: "Contato | DevLps",
+  title: "Fale Conosco | DevLps",
   description:
-    "Vamos conversar para desenvolver seu projeto. Dê o primeiro passo para iniciar sua vitrine online, para expor seu trabalho, arte, hobby ou conteúdo, fale diretamente com Douglas Lopes.",
+    "Entre em contato com Douglas Lopes para projetos, parcerias ou dúvidas.",
+  openGraph: {
+    title: "Fale Conosco | DevLps",
+    description:
+      "Entre em contato com Douglas Lopes para projetos, parcerias ou dúvidas.",
+    url: "https://devlps.vercel.app/contato",
+    images: [
+      {
+        url: "https://devlps.vercel.app/og-images/thumbContato.avif", // Substitua pela imagem de contato
+        width: 1200,
+        height: 630,
+        alt: "Entre em contato com Douglas Lopes",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fale Conosco | DevLps",
+    description:
+      "Entre em contato com Douglas Lopes para projetos, parcerias ou dúvidas.",
+    images: ["https://devlps.vercel.app/og-images/thumbContato.avif"], // Substitua pela imagem de contato
+  },
+  alternates: {
+    canonical: "https://devlps.vercel.app/contato",
+  },
 };
 
 export default function ContatoLayout({

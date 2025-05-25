@@ -1,11 +1,4 @@
-// src/app/cafe/page.tsx
-// Este arquivo é um Server Component por padrão.
-// O "use client" pode ser movido para um componente filho se a página não tiver
-// interatividade no nível do arquivo page.tsx.
-// Se TODA a sua lógica interativa estiver neste arquivo, mantenha "use client" no topo.
 "use client"; // Mantenha se a lógica de estado e efeitos for toda aqui.
-
-import type { Metadata } from "next"; // Importe Metadata AQUI, não em `CafePage`
 
 import { useState, useEffect, SetStateAction, Dispatch } from "react";
 import Image from "next/image";
@@ -30,37 +23,6 @@ const LOGO_PIX_HEIGHT = 80;
 const QR_CODE_WIDTH = 250;
 const QR_CODE_HEIGHT = 250;
 
-// EXPORTAÇÃO DA METADATA PARA ESTA PÁGINA ESPECÍFICA
-// Esta `metadata` será mesclada com a do layout pai.
-export const metadata: Metadata = {
-  title: "Contribua com um café ☕ | DevLps", // Este título final será usado para /cafe
-  description: "Ajude com um café e apoie novos projetos.", // Esta descrição final será usada para /cafe
-  openGraph: {
-    title: "Contribua com um café ☕ | DevLps",
-    description: "Ajude com um café e apoie novos projetos.",
-    url: "https://devlps.vercel.app/cafe",
-    images: [
-      {
-        url: "https://devlps.vercel.app/og-images/thumbCafe.avif",
-        width: 1200,
-        height: 630,
-        alt: "Imagem de compartilhamento para a página de café",
-      },
-    ],
-    type: "website",
-    siteName: "DevLps", // Se quiser o nome do site aqui
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Contribua com um café ☕ | DevLps",
-    description: "Ajude com um café e apoie novos projetos.",
-    images: ["https://devlps.vercel.app/og-images/thumbCafe.avif"],
-    // creator: "@seu_usuario_twitter",
-  },
-  alternates: {
-    canonical: "https://devlps.vercel.app/cafe",
-  },
-};
 
 export default function CafePage() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
