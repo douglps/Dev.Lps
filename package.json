@@ -2,7 +2,7 @@
   "name": "devlps",
   "version": "2.0.0",
   "private": true,
-  "homepage": "https://digigram-ten.vercel.app/",
+  "homepage": "https://devlps.vercel.app/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

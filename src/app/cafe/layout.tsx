@@ -4,9 +4,8 @@ import "@/src/styles/globals.css";
 export const metadata: Metadata = {
   title: "DevLps | Portifólio de Douglas Lopes",
   description:
-    "Apoie o desenvolvimento e os conteúdos do DigiGram contribuindo com um café.",
+    "Apoie o desenvolvimento e os conteúdos do DevLps contribuindo com um café.",
 };
-
 
 export default function CafeLayout({
   children,

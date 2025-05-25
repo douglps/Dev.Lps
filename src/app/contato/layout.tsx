@@ -15,28 +15,48 @@ export default function ContatoLayout({
 }) {
   return (
     <section className="contato">
-      <Head><meta property="og:title" content="Contato DevLps | Portifólio de Douglas Lopes" />
-  <meta property="og:description" content="Fale diretamente com Douglas Lopes." />
-  <meta property="og:url" content="https://digigram-ten.vercel.app/contato" />
-  <meta property="og:image" content="https://digigram-ten.vercel.app/og-images/thumbcompart.jpg" />
+      <Head>
+        <meta
+          property="og:title"
+          content="Contato DevLps | Portifólio de Douglas Lopes"
+        />
+        <meta
+          property="og:description"
+          content="Fale diretamente com Douglas Lopes."
+        />
+        <meta property="og:url" content="https://devlps.vercel.app/contato" />
+        <meta
+          property="og:image"
+          content="https://devlps.vercel.app/og-images/thumbcompart.jpg"
+        />
 
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Contato - DevLps | Portifólio de Douglas Lopes" />
-  <meta name="twitter:description" content="Fale diretamente com Douglas Lopes." />
-  <meta name="twitter:image" content="https://digigram-ten.vercel.app/og-images/thumbcompart.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Contato - DevLps | Portifólio de Douglas Lopes"
+        />
+        <meta
+          name="twitter:description"
+          content="Fale diretamente com Douglas Lopes."
+        />
+        <meta
+          name="twitter:image"
+          content="https://devlps.vercel.app/og-images/thumbcompart.jpg"
+        />
 
-        <link rel="canonical" href="https://digigram-ten.vercel.app/conttao" />
+        <link rel="canonical" href="https://devlps.vercel.app/conttao" />
 
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@type": "ContactPage",
-              "url": "https://digigram-ten.vercel.app/contato",
+              "url": "https://devlps.vercel.app/contato",
               "name": "Contato - Douglas Lopes"
             }
           `}
-        </script></Head>
+        </script>
+      </Head>
       {children}
     </section>
   );

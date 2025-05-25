@@ -11,7 +11,6 @@ const COFFEE_ICON_WIDTH = 24;
 const COFFEE_ICON_HEIGHT = 24;
 
 export default function TermoUsoPage() {
-
   const handleNavClick = (id: string) => `#${id}`;
 
   const sections = [
@@ -64,10 +63,10 @@ export default function TermoUsoPage() {
               <strong>Website:</strong>{" "}
               <S.PrivSpanLink
                 as="a"
-                href="https://digigram-ten.vercel.app/"
+                href="https://devlps.vercel.app/"
                 target="_blank"
               >
-                https://digigram-ten.vercel.app/
+                https://devlps.vercel.app/
               </S.PrivSpanLink>
             </li>
             <li>
@@ -190,10 +189,10 @@ export default function TermoUsoPage() {
               <strong>Website:</strong>{" "}
               <S.PrivSpanLink
                 as="a"
-                href="https://digigram-ten.vercel.app/"
+                href="https://devlps.vercel.app/"
                 target="_blank"
               >
-                https://digigram-ten.vercel.app/
+                https://devlps.vercel.app/
               </S.PrivSpanLink>
             </li>
           </ul>

@@ -123,27 +123,21 @@ export default function CafePage() {
   return (
     <S.PixSection>
       <Head>
-        <meta
-          property="og:title"
-          content="Contribua com um café ☕ | DigiGram"
-        />
+        <meta property="og:title" content="Contribua com um café ☕ | DevLps" />
         <meta
           property="og:description"
           content="Ajude com um café e apoie novos projetos."
         />
-        <meta
-          property="og:url"
-          content="https://digigram-ten.vercel.app/cafe"
-        />
+        <meta property="og:url" content="https://devlps.vercel.app/cafe" />
         <meta
           property="og:image"
-          content="https://digigram-ten.vercel.app/og-images/thumbcompart.jpg"
+          content="https://devlps.vercel.app/og-images/thumbcompart.jpg"
         />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Contribua com um café ☕ | DigiGram"
+          content="Contribua com um café ☕ | DevLps"
         />
         <meta
           name="twitter:description"
@@ -151,10 +145,10 @@ export default function CafePage() {
         />
         <meta
           name="twitter:image"
-          content="https://digigram-ten.vercel.app/og-images/thumbcompart.jpg"
+          content="https://devlps.vercel.app/og-images/thumbcompart.jpg"
         />
 
-        <link rel="canonical" href="https://digigram-ten.vercel.app/cafe" />
+        <link rel="canonical" href="https://devlps.vercel.app/cafe" />
       </Head>
       <S.ContainerPix>
         {/* Antiga .container--pix */}

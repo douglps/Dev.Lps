@@ -4,9 +4,7 @@ import Link from "next/link";
 
 import * as S from "@/src/styles/PrivacidadeStyled";
 
-
 export default function PrivacidadePage() {
-  
   const handleNavClick = (id: string) => `#${id}`;
 
   const sections = [
@@ -23,7 +21,10 @@ export default function PrivacidadePage() {
   ];
 
   return (
-    <S.ContainerPrivacidade role="region" aria-labelledby="titulo-politica-privacidade">
+    <S.ContainerPrivacidade
+      role="region"
+      aria-labelledby="titulo-politica-privacidade"
+    >
       <S.PrivacidadeGrid>
         <S.PrivacidadeNavegacao aria-label="Sumário da política de privacidade">
           <ul>
@@ -61,8 +62,12 @@ export default function PrivacidadePage() {
             </li>
             <li>
               <strong>Website:</strong>{" "}
-              <S.PrivSpanLink as="a" href="https://digigram-ten.vercel.app/" target="_blank" >
-                https://digigram-ten.vercel.app/
+              <S.PrivSpanLink
+                as="a"
+                href="https://devlps.vercel.app/"
+                target="_blank"
+              >
+                https://devlps.vercel.app/
               </S.PrivSpanLink>
             </li>
             <li>
@@ -140,8 +145,12 @@ export default function PrivacidadePage() {
             </li>
             <li>
               <strong>Website:</strong>{" "}
-              <S.PrivSpanLink as="a" href="https://digigram-ten.vercel.app/" target="_blank" >
-                https://digigram-ten.vercel.app/
+              <S.PrivSpanLink
+                as="a"
+                href="https://devlps.vercel.app/"
+                target="_blank"
+              >
+                https://devlps.vercel.app/
               </S.PrivSpanLink>
             </li>
           </ul>
