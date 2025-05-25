@@ -1,34 +1,69 @@
-// src/utils/theme.ts
 "use client";
 
-// Garante que o código só execute no navegador
-function isBrowser() {
+// Tipos de tema suportados
+export type ThemeMode = "light" | "dark" | "system";
+
+// Verifica se está no navegador
+function isBrowser(): boolean {
   return typeof window !== "undefined";
 }
 
-export function initTheme() {
-  if (!isBrowser()) {
-    return;
+// Resolve o tema real com base no modo ("light" | "dark" | "system")
+function resolveTheme(mode: ThemeMode): "light" | "dark" {
+  if (mode === "system") {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return prefersDark ? "dark" : "light";
   }
-  const stored = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = stored || (prefersDark ? "dark" : "light");
-
-  // Uma forma mais concisa de garantir a classe correta
-  document.documentElement.className = theme;
+  return mode;
 }
 
-export function toggleTheme() {
-  if (!isBrowser()) {
-    return;
-  }
-  const current = document.documentElement.classList.contains("dark")
-    ? "dark"
-    : "light";
-  const next = current === "dark" ? "light" : "dark";
+// Aplica o tema ao <html>
+function applyTheme(mode: ThemeMode) {
+  const finalTheme = resolveTheme(mode);
 
-  // Direto ao ponto: remove a classe atual e adiciona a próxima
-  document.documentElement.classList.remove(current);
-  document.documentElement.classList.add(next);
-  localStorage.setItem("theme", next);
+  document.documentElement.classList.remove("light", "dark");
+  document.documentElement.classList.add(finalTheme);
+
+  // Transição suave ao mudar o tema
+  document.documentElement.style.transition = "background-color 0.3s, color 0.3s";
+
+  // Salva o modo preferido
+  localStorage.setItem("theme", mode);
+}
+
+export function initTheme(): void {
+  if (!isBrowser()) return;
+
+  const stored = localStorage.getItem("theme") as ThemeMode | null;
+  const mode: ThemeMode = stored || "system";
+  applyTheme(mode);
+
+  // Observa mudanças no sistema (caso tema seja "system")
+  if (mode === "system") {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", () => applyTheme("system"));
+  }
+
+  // Sincroniza entre abas/janelas
+  window.addEventListener("storage", (e) => {
+    if (e.key === "theme" && e.newValue) {
+      const mode = e.newValue as ThemeMode;
+      applyTheme(mode);
+    }
+  });
+}
+
+export function toggleTheme(): void {
+  if (!isBrowser()) return;
+
+  const currentClass = document.documentElement.classList.contains("dark") ? "dark" : "light";
+  const stored = localStorage.getItem("theme") as ThemeMode | null;
+  const currentMode = stored || "system";
+
+  // Alterna entre light e dark, nunca system
+  const nextMode: ThemeMode =
+    resolveTheme(currentMode) === "dark" ? "light" : "dark";
+
+  applyTheme(nextMode);
 }
