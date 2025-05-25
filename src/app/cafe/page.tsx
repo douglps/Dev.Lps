@@ -1,12 +1,17 @@
-"use client"; // Indica que este é um componente cliente
+// src/app/cafe/page.tsx
+// Este arquivo é um Server Component por padrão.
+// O "use client" pode ser movido para um componente filho se a página não tiver
+// interatividade no nível do arquivo page.tsx.
+// Se TODA a sua lógica interativa estiver neste arquivo, mantenha "use client" no topo.
+"use client"; // Mantenha se a lógica de estado e efeitos for toda aqui.
 
-import Head from "next/head";
+import type { Metadata } from "next"; // Importe Metadata AQUI, não em `CafePage`
 
 import { useState, useEffect, SetStateAction, Dispatch } from "react";
-import Image from "next/image"; // Importa Image do Next.js
-import * as S from "@/src/styles/CafeStyled"; // Importa todos os Styled Components
+import Image from "next/image";
+import * as S from "@/src/styles/CafeStyled";
 
-// Importe as imagens (ajuste os caminhos se seus aliases forem diferentes)
+// ... (todas as suas importações de imagens)
 import closeIcon from "@/images/utils/close.svg";
 import copiaColaIconDark from "@/images/utils/copia-cola-br.svg";
 import copiaColaIconLight from "@/images/utils/copia-cola-pr.svg";
@@ -17,13 +22,45 @@ import logoPixIcon from "@/images/utils/logo_pix.avif";
 import qrCodeIcon from "@/images/utils/qr-code.svg";
 import qrPixNextImage from "@/images/utils/qrpix-next.avif";
 
-// Defina as dimensões padrão para os ícones, AJUSTE CONFORME O TAMANHO REAL dos seus SVGs/imagens
+// Defina as dimensões padrão para os ícones
 const COPY_BUTTON = 20;
 const ICON_SIZE = 160;
-const LOGO_PIX_WIDTH = 160; // Exemplo de largura para o logo do Pix
-const LOGO_PIX_HEIGHT = 80; // Exemplo de altura para o logo do Pix
-const QR_CODE_WIDTH = 250; // Exemplo de largura para o QR Code
-const QR_CODE_HEIGHT = 250; // Exemplo de altura para o QR Code
+const LOGO_PIX_WIDTH = 160;
+const LOGO_PIX_HEIGHT = 80;
+const QR_CODE_WIDTH = 250;
+const QR_CODE_HEIGHT = 250;
+
+// EXPORTAÇÃO DA METADATA PARA ESTA PÁGINA ESPECÍFICA
+// Esta `metadata` será mesclada com a do layout pai.
+export const metadata: Metadata = {
+  title: "Contribua com um café ☕ | DevLps", // Este título final será usado para /cafe
+  description: "Ajude com um café e apoie novos projetos.", // Esta descrição final será usada para /cafe
+  openGraph: {
+    title: "Contribua com um café ☕ | DevLps",
+    description: "Ajude com um café e apoie novos projetos.",
+    url: "https://devlps.vercel.app/cafe",
+    images: [
+      {
+        url: "https://devlps.vercel.app/og-images/thumbCafe.avif",
+        width: 1200,
+        height: 630,
+        alt: "Imagem de compartilhamento para a página de café",
+      },
+    ],
+    type: "website",
+    siteName: "DevLps", // Se quiser o nome do site aqui
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contribua com um café ☕ | DevLps",
+    description: "Ajude com um café e apoie novos projetos.",
+    images: ["https://devlps.vercel.app/og-images/thumbCafe.avif"],
+    // creator: "@seu_usuario_twitter",
+  },
+  alternates: {
+    canonical: "https://devlps.vercel.app/cafe",
+  },
+};
 
 export default function CafePage() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
@@ -122,34 +159,7 @@ export default function CafePage() {
 
   return (
     <S.PixSection>
-      <Head>
-        <meta property="og:title" content="Contribua com um café ☕ | DevLps" />
-        <meta
-          property="og:description"
-          content="Ajude com um café e apoie novos projetos."
-        />
-        <meta property="og:url" content="https://devlps.vercel.app/cafe" />
-        <meta
-          property="og:image"
-          content="https://devlps.vercel.app/og-images/thumbcompart.jpg"
-        />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Contribua com um café ☕ | DevLps"
-        />
-        <meta
-          name="twitter:description"
-          content="Ajude com um café e apoie novos projetos."
-        />
-        <meta
-          name="twitter:image"
-          content="https://devlps.vercel.app/og-images/thumbcompart.jpg"
-        />
-
-        <link rel="canonical" href="https://devlps.vercel.app/cafe" />
-      </Head>
+      {/* REMOVA O <Head> DAQUI! */}
       <S.ContainerPix>
         {/* Antiga .container--pix */}
         <S.FundoPix>

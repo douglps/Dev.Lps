@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import "@/src/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "DevLps | Portifólio de Douglas Lopes",
-  description:
-    "Explore o portifólio digital de Douglas Lopes — desenvolvedor web focado em design funcional, performance e criatividade.",
+  title: "Termos de Uso | DevLps",
 };
 
 export default function TermosLayout({

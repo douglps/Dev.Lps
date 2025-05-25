@@ -1,11 +1,13 @@
 import Head from "next/head";
-import type { Metadata } from "next";
 import "@/src/styles/globals.css";
 
+import type { Metadata } from "next";
+
+// Opcional: Se você quiser um título de seção para toda a rota /contato
 export const metadata: Metadata = {
-  title: "Contato - DevLps | Portifólio de Douglas Lopes",
+  title: "Contato | DevLps",
   description:
-    "Explore o portifólio digital de Douglas Lopes — desenvolvedor web focado em design funcional, performance e criatividade.",
+    "Vamos conversar para desenvolver seu projeto. Dê o primeiro passo para iniciar sua vitrine online, para expor seu trabalho, arte, hobby ou conteúdo, fale diretamente com Douglas Lopes.",
 };
 
 export default function ContatoLayout({
