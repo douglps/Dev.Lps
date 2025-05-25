@@ -1,0 +1,66 @@
+/* Definições de tema padrão (light) */
+html.light {
+  --color-text: rgba(0, 0, 0, 0.87);
+  --bg-gradient: linear-gradient(
+    180deg,
+    #fff2df94 20%,
+    rgba(223, 255, 235, 0.801) 80%
+  );
+  --color-bar-bg: #e9e4dd;
+  --color-border-menu: gray;
+  --img-bg: white;
+  --theme-toggle-img: url("/images/utils/dark_mode.svg"); /* Renomeado para clareza */
+  --shadow-primary: inset 0rem 0rem 9rem 30rem rgba(0, 0, 0, 0.5); /* Mais genérico */
+  --shadow-secondary: inset 0rem 0rem 9rem 30rem #b2e7bd4d; /* Mais genérico */
+  --border-style: none;
+  --blur-effect: blur(1.5rem); /* Renomeado para clareza */
+  --menu-background: #e9e4dd;
+  --menu-link-color: black;
+  --quote-color: #914b00;
+  --skill-background: rgb(35, 35, 35);
+  --font-weight-display: 600; /* Mais específico */
+  --card-gradient: conic-gradient(
+    rgb(243, 243, 243) 180deg,
+    rgb(2, 2, 2) 360deg
+  );
+  --card-text-color: black;
+  --skill-name-color: white;
+  --portfolio-shadow: inset 0rem 0rem 9rem 30rem rgb(211 211 211 / 50%);
+  --skill-header-shadow: inset 0rem 0rem 9rem 30rem rgba(255, 255, 255, 0.5);
+  --footer-background: rgba(255, 255, 255, 0);
+  --send-button-color: #11f041;
+  --send-button-hover-color: rgb(11, 92, 27);
+  --social-media-background: rgba(0, 0, 0, 0.568);
+  --tab-background: #cdeeee;
+}
+
+/* Definições de tema dark */
+html.dark {
+  --color-text: rgba(255, 255, 255, 0.87);
+  --bg-gradient: linear-gradient(45deg, #120b1c 30%, #121f14 85%, #150332);
+  --color-bar-bg: #11f041;
+  --color-border-menu: #633e9b;
+  --img-bg: rgb(0, 0, 0);
+  --theme-toggle-img: url("/images/utils/dark_mode.svg"); /* Mantido para demonstração */
+  --shadow-primary: inset 0rem 0rem 0rem 40rem rgba(207, 207, 207, 0.06);
+  --shadow-secondary: inset 0rem 0rem 0rem 40rem rgba(207, 207, 207, 0.06);
+  --blur-effect: blur(1.5rem);
+  --menu-background: rgba(35, 35, 35);
+  --menu-link-color: white;
+  --quote-color: #ff8400;
+  --skill-background: rgb(205, 238, 238);
+  --font-weight-display: 400;
+  --card-gradient: conic-gradient(
+    rgb(8.3636363636, 14.6363636364, 9.6704545455) 180deg,
+    rgb(178.5, 178.5, 178.5) 360deg
+  );
+  --card-text-color: white;
+  --skill-name-color: black;
+  --portfolio-shadow: inset 0rem 0rem 9rem 30rem rgba(0, 0, 0, 0.5);
+  --skill-header-shadow: inset 0rem 0rem 9rem 30rem rgba(0, 0, 0, 0.5);
+  --footer-background: rgba(35, 35, 35);
+  --send-button-color: #27913ec7;
+  --send-button-hover-color: rgb(115, 201, 135);
+  --tab-background: #1d2323;
+  --social-media-background: rgba(255, 255, 255, 0.829);
+}

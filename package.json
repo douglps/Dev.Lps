@@ -1,25 +1,40 @@
 {
   "name": "devlps",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
+  "homepage": "https://digigram-ten.vercel.app/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "npm run sitemap",
+    "sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
+    "@babel/runtime": "^7.27.1",
+    "@hookform/resolvers": "^5.0.1",
+    "autoprefixer": "^10.4.21",
+    "next": "15.3.2",
+    "nodemailer": "^7.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.3.2"
+    "styled-components": "^6.1.18",
+    "swiper": "^11.2.7"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/styled-components": "^5.1.34",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
-    "@eslint/eslintrc": "^3"
+    "react-hook-form": "^7.56.4",
+    "typescript": "^5",
+    "zod": "^3.25.22"
   }
 }

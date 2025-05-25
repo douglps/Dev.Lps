@@ -18,8 +18,12 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./*"], // Mapeia "@/" para a raiz do projeto
+      "@/src/components/*": ["./src/components/*"], // Exemplo: para componentes
+      "@/images/*": ["./public/images/*"], // Mapeia "@/images" para a pasta "public/images"
+      "@/utils/*": ["./utils/*"] // Exemplo: para utilitários
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
