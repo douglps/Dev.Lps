@@ -11,7 +11,9 @@ function isBrowser(): boolean {
 // Resolve o tema real com base no modo ("light" | "dark" | "system")
 function resolveTheme(mode: ThemeMode): "light" | "dark" {
   if (mode === "system") {
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
     return prefersDark ? "dark" : "light";
   }
   return mode;
@@ -25,7 +27,8 @@ function applyTheme(mode: ThemeMode) {
   document.documentElement.classList.add(finalTheme);
 
   // Transição suave ao mudar o tema
-  document.documentElement.style.transition = "background-color 0.3s, color 0.3s";
+  document.documentElement.style.transition =
+    "background-color 0.3s, color 0.3s";
 
   // Salva o modo preferido
   localStorage.setItem("theme", mode);
@@ -57,7 +60,6 @@ export function initTheme(): void {
 export function toggleTheme(): void {
   if (!isBrowser()) return;
 
-  const currentClass = document.documentElement.classList.contains("dark") ? "dark" : "light";
   const stored = localStorage.getItem("theme") as ThemeMode | null;
   const currentMode = stored || "system";
 
