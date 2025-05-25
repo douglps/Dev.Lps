@@ -12,7 +12,6 @@ import {
   SocialContainer,
   SocialsLink,
   ImgFooter,
-  FooterModal,
   LinkPrivacidade,
   Version,
   Copyright,

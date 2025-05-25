@@ -1,15 +1,10 @@
 import styled, { css } from "styled-components";
 
-const fundoShadowBr = "inset 0rem 0rem 0rem 40rem #cfcfcf;";
+
 const fundoBlur = "blur(1rem)";
 const corRoxaSecundaria = "#633e9b";
 const fundoAbas = "rgba(106, 13, 173, 0.25)";
-const letras = "#ffffff";
-const citado = "#ff8400";
 const pesoFonte = "600";
-const fundoSkill = "rgb(205, 238, 238)";
-const cards =
-  "conic-gradient(rgb(8.3636363636, 14.6363636364, 9.6704545455) 180deg, rgb(178.5, 178.5, 178.5) 360deg);";
 
 // --- Mixins ---
 const caixaFlexCenter = css`
@@ -18,10 +13,6 @@ const caixaFlexCenter = css`
   align-items: center;
 `;
 
-const fundoTransparenteBr = css`
-  background-color: transparent;
-  border: 1px solid ${corRoxaSecundaria};
-`;
 
 const circuloFlexCenterB = css`
   ${caixaFlexCenter};

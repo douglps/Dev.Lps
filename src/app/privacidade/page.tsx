@@ -1,44 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 import * as S from "@/src/styles/PrivacidadeStyled";
 
 
 export default function PrivacidadePage() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const currentTheme = document.documentElement.classList.contains("dark")
-        ? "dark"
-        : "light";
-      setTheme(currentTheme);
-    }
-  }, []);
-
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const observer = new MutationObserver(() => {
-      const updatedTheme = document.documentElement.classList.contains("dark")
-        ? "dark"
-        : "light";
-      setTheme(updatedTheme);
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
+  
   const handleNavClick = (id: string) => `#${id}`;
 
   const sections = [

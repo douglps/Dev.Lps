@@ -1,6 +1,6 @@
 import Image from "next/image";
 import closeIcon from "@/images/utils/close.svg";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 interface ModalProps {
   children: React.ReactNode;

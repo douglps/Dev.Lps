@@ -27,20 +27,6 @@ const CODE_IMAGE_WIDTH = 100; // Exemplo: ajuste para a largura real da imagem d
 const CODE_IMAGE_HEIGHT = 100; // Exemplo: ajuste para a altura real da imagem de código
 
 export function Hero() {
-  const [showMessage, setShowMessage] = useState<boolean>(false);
-  const [hideLoading, setHideLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const timer = setTimeout(() => {
-      setHideLoading(true);
-      setShowMessage(true);
-    }, 1500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <HeroSection id="SobreMim">
       <HeroContentContainer>

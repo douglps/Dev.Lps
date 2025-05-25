@@ -20,11 +20,9 @@ import {
 } from "@/src/styles/ContatoStyled"; // Verifique o caminho real da importação
 
 import whatsappIcon from "@/images/socials/whatsapp.svg";
-import linkedinIcon from "@/images/socials/linkedin.svg";
 import emailIconDark from "@/images/socials/email-pr.svg";
 import emailIconLight from "@/images/socials/email-br.svg";
 
-const map = `80%`;
 
 export default function ContatoInfo() {
   const { theme } = useTheme();

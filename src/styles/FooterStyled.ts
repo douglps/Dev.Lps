@@ -1,5 +1,5 @@
 // components/Footer/styles.ts
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Link from "next/link";
 
 export const FooterSection = styled.footer`
