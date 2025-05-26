@@ -66,9 +66,9 @@ export default function TermoUsoPage() {
             Este documento estabelece os Termos de Uso aplicáveis à navegação e
             utilização do portfólio profissional online{" "}
             <FontWeight>Dev.Lps</FontWeight>, de propriedade e operado pelo
-            <FontWeight> titular</FontWeight> (doravante denominado "Titular").
+            <FontWeight> titular</FontWeight> (doravante denominado {"'Titular'"}).
             Ao acessar e utilizar este website, o{" "}
-            <FontWeight>usuário</FontWeight> (doravante denominado "Usuário")
+            <FontWeight>usuário</FontWeight> (doravante denominado {"'Usuário'"})
             manifesta sua aceitação integral e incondicional das condições aqui
             dispostas.
           </p>

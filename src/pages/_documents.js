@@ -24,8 +24,8 @@ export default function Document() {
          <meta name="theme-color" content="#11f041" />
 
         {/* Google Analytics tag - Mantenha ele aqui no Head */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-L7QMN988BD"></script>
-        <script
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-L7QMN988BD"></Script>
+        <Script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

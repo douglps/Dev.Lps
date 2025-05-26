@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 
@@ -9,8 +9,10 @@ import imgEsquerda from "@/images/utils/a-key.png";
 import imgBaixo from "@/images/utils/s-key.png";
 import imgDireita from "@/images/utils/d-key.png";
 
-const comandWidth = 30; // Largura do canvas em blocos
-const comandHeight = 30; // Altura do canvas em blocos
+// Dimensões do tabuleiro em blocos
+const BOARD_WIDTH = 16;
+const BOARD_HEIGHT = 27; // Ajustado para corresponder à altura do canvas (405px / 15px por bloco = 27)
+const BLOCK_SIZE = 15; // Tamanho de cada bloco em pixels
 
 const PageWrapper = styled.div`
   display: flex;
@@ -48,6 +50,16 @@ const MobileButton = styled.button`
   border-radius: 50%;
   min-width: 60px;
   min-height: 60px;
+  background: var(--cor-laranja-primaria);
+  color: black;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const Game = styled.div`
@@ -65,6 +77,7 @@ const GamePoint = styled.div`
 const Canvas = styled.canvas`
   border: 2px solid #555;
   background: black;
+  border-radius: 8px; /* Adicionado para arredondar as bordas do canvas */
 `;
 
 const Score = styled.div`
@@ -86,12 +99,14 @@ const Overlay = styled.div`
   justify-content: center;
   z-index: 10;
   gap: 2rem;
+  border-radius: 8px; /* Adicionado para arredondar as bordas do overlay */
 `;
 
 const Title = styled.h1`
   font-size: 4rem;
   color: white;
   margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
 const Button = styled.button`
@@ -104,9 +119,17 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 8px;
   margin-top: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, transform 0.1s ease;
 
   &:hover {
     background: white;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -118,48 +141,47 @@ const NextPieceContainer = styled.div`
   align-items: center;
   padding: 1rem;
   color: ${(props) => props.theme.colors.letras};
+  background: #353535;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
-
-const Instructions = styled.div``;
 
 const NextPieceGrid = styled.div`
   display: inline-block;
+  border: 1px solid #444;
+  background: #222;
+  padding: 5px;
+  border-radius: 4px;
+  margin-left: 1rem;
 `;
 
 const NextPieceCell = styled.div<{ color: string | null }>`
-  width: 20px;
-  height: 20px;
+  width: ${BLOCK_SIZE}px; /* Usar BLOCK_SIZE para consistência */
+  height: ${BLOCK_SIZE}px; /* Usar BLOCK_SIZE para consistência */
   background-color: ${({ color }) => color || "transparent"};
   border: 1px solid #222;
 `;
 
-// Novos estilos para o botão de regras e overlay
-const RulesButton = styled.button`
-  padding: 0.8rem 1.5rem;
-  font-size: 1.6rem;
-  background: #11f041;
-  font-weight: bold;
-  color: black;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  z-index: 11; // Acima do overlay principal
-
+const RulesButton = styled(Button)`
+  background: #11f041; /* Verde */
+  z-index: 11;
   &:hover {
-    background: white;
+    background: #aaffbb;
   }
 `;
 
 const RulesOverlay = styled(Overlay)`
   display: flex;
   justify-content: flex-start;
-  background: rgba(0, 0, 0, 0.95); // Mais escuro para as regras
-  z-index: 12; // Acima do overlay principal
-  overflow-y: auto; // Permite rolagem se necessário
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 12;
+  overflow-y: auto;
   height: 70%;
-  align-self: anchor-center;
-  scrollbar-width: thin; // Estilo de scrollbar para Firefox
-  scrollbar-color: green white; // Cor da barra e do fundo da scrollbar
+  align-self: center; /* Centraliza verticalmente */
+  scrollbar-width: thin;
+  scrollbar-color: green white;
+  padding-top: 5rem; /* Espaçamento superior para o conteúdo */
+  box-sizing: border-box; /* Inclui padding na altura */
 `;
 
 const Controls = styled.div`
@@ -171,25 +193,42 @@ const Controls = styled.div`
   max-width: 600px;
   text-align: left;
   text-indent: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   @media (max-width: 768px) {
     display: none;
   }
+
+  ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #ccc;
+  }
+
+  img {
+    margin-right: 10px;
+  }
 `;
 
-const RulesContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  background: #353535;
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 600px;
-  text-align: left;
-  text-indent: 1rem;
-
+const RulesContent = styled(Controls)`
   h2 {
     color: #fff;
     margin-bottom: 1rem;
     text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  h3 {
+    color: #fff;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    text-align: left;
   }
 
   p {
@@ -208,6 +247,12 @@ const RulesContent = styled.div`
     margin-bottom: 0.5rem;
   }
 `;
+
+// Interface para o objeto Player
+interface Player {
+  pos: { x: number; y: number };
+  matrix: number[][];
+}
 
 const createMatrix = (w: number, h: number): number[][] => {
   const matrix = [];
@@ -255,13 +300,13 @@ const TETROMINOS: Record<string, number[][]> = {
 
 const colors = [
   null,
-  "#FF0D72",
-  "#0DC2FF",
-  "#0DFF72",
-  "#F538FF",
-  "#FF8E0D",
-  "#FFE138",
-  "#3877FF",
+  "#FF0D72", // T
+  "#0DC2FF", // O
+  "#0DFF72", // L
+  "#F538FF", // J
+  "#FF8E0D", // I
+  "#FFE138", // S
+  "#3877FF", // Z
 ];
 
 const rotate = (matrix: number[][]): number[][] =>
@@ -274,18 +319,20 @@ const Tetris404: React.FC = () => {
   const [started, setStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [nextPiece, setNextPiece] = useState<number[][]>([]);
-  const [showRules, setShowRules] = useState(false); // Novo estado para regras
+  const [showRules, setShowRules] = useState(false);
 
-  const matrixRef = useRef(createMatrix(16, 27));
-  const playerRef = useRef({ pos: { x: 0, y: 0 }, matrix: TETROMINOS.T });
-  const nextPieceRef = useRef<number[][]>(randomPiece());
+  // Refs para o estado do jogo que não causam re-renderização
+  const matrixRef = useRef(createMatrix(BOARD_WIDTH, BOARD_HEIGHT));
+  const playerRef = useRef<Player>({ pos: { x: 0, y: 0 }, matrix: TETROMINOS.T });
+  const nextPieceRef = useRef<number[][]>([]); // Inicializado vazio, será preenchido no primeiro randomPiece
 
-  function randomPiece() {
+  // Funções de lógica do jogo memorizadas com useCallback
+  const randomPiece = useCallback((): number[][] => {
     const keys = Object.keys(TETROMINOS);
     return TETROMINOS[keys[Math.floor(Math.random() * keys.length)]];
-  }
+  }, []); // Sem dependências, TETROMINOS é uma constante
 
-  const collide = (matrix: number[][], player: any): boolean => {
+  const collide = useCallback((matrix: number[][], player: Player): boolean => {
     const m = player.matrix;
     const o = player.pos;
     for (let y = 0; y < m.length; ++y) {
@@ -298,17 +345,17 @@ const Tetris404: React.FC = () => {
       }
     }
     return false;
-  };
+  }, []); // Sem dependências, pura
 
-  const merge = (matrix: number[][], player: any) => {
+  const merge = useCallback((matrix: number[][], player: Player) => {
     player.matrix.forEach((row: number[], y: number) => {
       row.forEach((value, x) => {
         if (value !== 0) matrix[y + player.pos.y][x + player.pos.x] = value;
       });
     });
-  };
+  }, []); // Sem dependências, pura
 
-  const sweepRows = (matrix: number[][]): number => {
+  const sweepRows = useCallback((matrix: number[][]): number => {
     let linesCleared = 0;
     outer: for (let y = matrix.length - 1; y >= 0; --y) {
       for (let x = 0; x < matrix[y].length; ++x) {
@@ -317,17 +364,21 @@ const Tetris404: React.FC = () => {
       const row = matrix.splice(y, 1)[0].fill(0);
       matrix.unshift(row);
       linesCleared++;
-      y++;
+      y++; // Re-verificar a mesma linha após a remoção
     }
     return linesCleared;
-  };
+  }, []); // Sem dependências, pura
 
-  const playerReset = () => {
+  const playerReset = useCallback(() => {
     const matrix = matrixRef.current;
+    // Garante que nextPieceRef.current tenha um valor inicial antes de ser usado
+    if (!nextPieceRef.current || nextPieceRef.current.length === 0) {
+      nextPieceRef.current = randomPiece();
+    }
     const piece = nextPieceRef.current;
-    nextPieceRef.current = randomPiece();
+    nextPieceRef.current = randomPiece(); // Gera a próxima peça
 
-    const newPlayer = {
+    const newPlayer: Player = {
       pos: {
         x: ((matrix[0].length / 2) | 0) - ((piece[0].length / 2) | 0),
         y: 0,
@@ -342,73 +393,85 @@ const Tetris404: React.FC = () => {
     }
 
     playerRef.current = newPlayer;
-    setNextPiece(nextPieceRef.current);
-  };
+    setNextPiece(nextPieceRef.current); // Atualiza o estado para renderizar a próxima peça
+  }, [randomPiece, collide, setGameOver, setStarted, setNextPiece]);
 
-  const playerDrop = () => {
+  const playerDrop = useCallback(() => {
     const matrix = matrixRef.current;
     const player = playerRef.current;
     player.pos.y++;
     if (collide(matrix, player)) {
-      player.pos.y--;
-      merge(matrix, player);
-      const lines = sweepRows(matrix);
+      player.pos.y--; // Volta uma posição se colidiu
+      merge(matrix, player); // Mescla a peça ao tabuleiro
+      const lines = sweepRows(matrix); // Verifica e limpa linhas
       if (lines > 0) {
         setScore((prev) => {
           let newScore = prev;
           if (lines === 1) {
             newScore += 10;
           } else if (lines > 1) {
-            newScore += 10 * lines * (1 + (lines - 1) * 0.5); // Modified scoring
+            // Pontuação modificada para 2, 3 e 4 linhas
+            newScore += 10 * lines * (1 + (lines - 1) * 0.5);
           }
-          setLevel(1 + Math.floor(newScore / 100));
+          setLevel(1 + Math.floor(newScore / 100)); // Aumenta o nível a cada 100 pontos
           return newScore;
         });
       }
-      playerReset();
+      playerReset(); // Reseta o jogador para a próxima peça
     }
-  };
+  }, [collide, merge, sweepRows, setScore, setLevel, playerReset]);
 
-  const playerMove = (dir: number) => {
+  const playerMove = useCallback((dir: number) => {
     const player = playerRef.current;
     player.pos.x += dir;
-    if (collide(matrixRef.current, player)) player.pos.x -= dir;
-  };
+    if (collide(matrixRef.current, player)) player.pos.x -= dir; // Volta se colidiu
+  }, [collide]);
 
-  const playerRotate = () => {
+  const playerRotate = useCallback(() => {
     const player = playerRef.current;
-    const cloned = rotate(player.matrix);
-    const old = player.matrix;
+    const cloned = rotate(player.matrix); // Rotaciona a matriz da peça
+    const old = player.matrix; // Salva a matriz antiga para reverter se houver colisão
     player.matrix = cloned;
-    if (collide(matrixRef.current, player)) player.matrix = old;
-  };
+    if (collide(matrixRef.current, player)) player.matrix = old; // Reverte se colidiu
+  }, [collide]);
 
-  const drawMatrix = (
-    ctx: CanvasRenderingContext2D,
-    matrix: number[][],
-    offset: { x: number; y: number }
-  ) => {
-    matrix.forEach((row, y) => {
-      row.forEach((value, x) => {
-        if (value !== 0) {
-          ctx.fillStyle = colors[value]!;
-          ctx.fillRect(x + offset.x, y + offset.y, 1, 1);
-        }
+  // Função para desenhar a matriz no canvas
+  const drawMatrix = useCallback(
+    (
+      ctx: CanvasRenderingContext2D,
+      matrix: number[][],
+      offset: { x: number; y: number }
+    ) => {
+      matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value !== 0) {
+            ctx.fillStyle = colors[value]!; // Usa o operador non-null assertion
+            ctx.fillRect(
+              x + offset.x,
+              y + offset.y,
+              1, // Tamanho do bloco em unidades de escala
+              1 // Tamanho do bloco em unidades de escala
+            );
+          }
+        });
       });
-    });
-  };
+    },
+    []
+  ); // Pura, sem dependências
 
+  // Efeito principal do jogo (loop de atualização e eventos)
   useEffect(() => {
-    if (!started) return;
-    if (showRules) return; // Não atualiza o jogo se as regras estiverem abertas
+    if (!started) return; // Não executa o loop se o jogo não começou
+    if (showRules) return; // Pausa o jogo se as regras estiverem abertas
 
     const canvas = canvasRef.current;
     if (!canvas) return;
     const context = canvas.getContext("2d");
     if (!context) return;
 
+    // Configura a escala do contexto do canvas
     context.setTransform(1, 0, 0, 1, 0, 0);
-    context.scale(15, 15);
+    context.scale(BLOCK_SIZE, BLOCK_SIZE); // Escala para o tamanho do bloco
 
     let dropCounter = 0;
     let lastTime = 0;
@@ -418,18 +481,23 @@ const Tetris404: React.FC = () => {
       const deltaTime = time - lastTime;
       lastTime = time;
       dropCounter += deltaTime;
+
+      // Lógica de queda automática da peça
       if (dropCounter > Math.max(1000 - level * 100, 100)) {
-        playerDrop();
+        playerDrop(); // Chama a função playerDrop (dependência)
         dropCounter = 0;
       }
+
+      // Limpa e redesenha o canvas
       context.clearRect(0, 0, canvas.width, canvas.height);
-      drawMatrix(context, matrixRef.current, { x: 0, y: 0 });
-      drawMatrix(context, playerRef.current.matrix, playerRef.current.pos);
-      animationFrameId = requestAnimationFrame(update);
+      drawMatrix(context, matrixRef.current, { x: 0, y: 0 }); // Desenha o tabuleiro
+      drawMatrix(context, playerRef.current.matrix, playerRef.current.pos); // Desenha a peça atual
+
+      animationFrameId = requestAnimationFrame(update); // Solicita o próximo frame
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (showRules) return; // Não processa input de jogo se as regras estiverem abertas
+      if (showRules) return; // Ignora input de jogo se as regras estiverem abertas
 
       if (["ArrowLeft", "a"].includes(event.key)) playerMove(-1);
       else if (["ArrowRight", "d"].includes(event.key)) playerMove(1);
@@ -437,24 +505,31 @@ const Tetris404: React.FC = () => {
       else if (["ArrowUp", "w"].includes(event.key)) playerRotate();
     };
 
+    // Adiciona o listener de teclado
     window.addEventListener("keydown", handleKeyDown);
-    playerReset();
-    update(0);
+    update(0); // Inicia o loop de animação
 
+    // Cleanup function para remover o listener e cancelar o frame de animação
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [started, level, showRules]); // Adicionar showRules como dependência
+  }, [started, level, showRules, playerDrop, playerMove, playerRotate, drawMatrix]); // Dependências do useEffect
 
+  // Função para reiniciar o jogo
   const handleRestart = () => {
-    matrixRef.current = createMatrix(12, 20);
+    matrixRef.current = createMatrix(BOARD_WIDTH, BOARD_HEIGHT); // Reseta o tabuleiro
     setScore(0);
     setLevel(1);
     setGameOver(false);
+    setStarted(true); // Inicia o jogo
+    playerReset(); // Reseta o jogador e gera a primeira peça
+  };
+
+  // Função para iniciar o jogo pela primeira vez
+  const handleStartGame = () => {
     setStarted(true);
-    nextPieceRef.current = randomPiece();
-    setNextPiece(nextPieceRef.current);
+    playerReset(); // Reseta o jogador e gera a primeira peça
   };
 
   return (
@@ -475,45 +550,45 @@ const Tetris404: React.FC = () => {
                 <Image
                   src={imgEsquerda}
                   alt="Tecla A"
-                  width={comandWidth}
-                  height={comandHeight}
+                  width={30} // Usando valores fixos para as imagens de controle
+                  height={30}
                 />{" "}
-                Tecla A: Mover o bloco lateralmente à esquerda.
+                Tecla A ou Seta Esquerda: Mover o bloco lateralmente à esquerda.
               </li>
               <li>
                 <Image
                   src={imgDireita}
                   alt="Tecla D"
-                  width={comandWidth}
-                  height={comandHeight}
+                  width={30}
+                  height={30}
                 />{" "}
-                Tecla D: Mover o bloco lateralmente à direita.
+                Tecla D ou Seta Direita: Mover o bloco lateralmente à direita.
               </li>
               <li>
                 <Image
                   src={imgBaixo}
                   alt="Tecla S"
-                  width={comandWidth}
-                  height={comandHeight}
+                  width={30}
+                  height={30}
                 />{" "}
-                Tecla S: Acelerar a queda do bloco (soft drop).
+                Tecla S ou Seta Baixo: Acelerar a queda do bloco (soft drop).
               </li>
               <li>
                 <Image
                   src={imgGirar}
                   alt="Tecla W"
-                  width={comandWidth}
-                  height={comandHeight}
+                  width={30}
+                  height={30}
                 />{" "}
-                Tecla W: Rotacionar o bloco.
+                Tecla W ou Seta Cima: Rotacionar o bloco.
               </li>
             </ul>
             <h3>Pontuação:</h3>
             <ul>
               <li>1 Linha: 10 pontos</li>
-              <li>2 Linhas: 30 pontos (10 * 2 * 1.5)</li>
-              <li>3 Linhas: 60 pontos (10 * 3 * 2)</li>
-              <li>4 Linhas (Tetris): 100 pontos (10 * 4 * 2.5)</li>
+              <li>2 Linhas: 30 pontos</li>
+              <li>3 Linhas: 60 pontos</li>
+              <li>4 Linhas (Tetris): 100 pontos</li>
             </ul>
             <p>
               A cada 100 pontos, o nível aumenta, fazendo com que os blocos
@@ -527,11 +602,10 @@ const Tetris404: React.FC = () => {
       {(!started || gameOver) && (
         <Overlay>
           <Title>{gameOver ? "GAME OVER" : "TETRIS"}</Title>
-          <Button onClick={gameOver ? handleRestart : () => setStarted(true)}>
+          <Button onClick={gameOver ? handleRestart : handleStartGame}>
             {gameOver ? "Reiniciar" : "Start"}
           </Button>
-          <RulesButton onClick={() => setShowRules(true)}>Regras</RulesButton>{" "}
-          {/* Botão das regras */}
+          <RulesButton onClick={() => setShowRules(true)}>Regras</RulesButton>
         </Overlay>
       )}
       <Game>
@@ -555,7 +629,11 @@ const Tetris404: React.FC = () => {
         <Score>
           Pontuação: {score} | Nível: {level}
         </Score>
-        <Canvas ref={canvasRef} width={240} height={400} />
+        <Canvas
+          ref={canvasRef}
+          width={BOARD_WIDTH * BLOCK_SIZE} // 16 * 15 = 240
+          height={BOARD_HEIGHT * BLOCK_SIZE} // 27 * 15 = 405
+        />
         <MobileControls>
           <MobileButton onClick={() => playerMove(-1)}>⬅️</MobileButton>
           <MobileButton onClick={() => playerRotate()}>🔄</MobileButton>
@@ -570,45 +648,41 @@ const Tetris404: React.FC = () => {
               <Image
                 src={imgEsquerda}
                 alt="Tecla A"
-                width={comandWidth}
-                height={comandHeight}
+                width={30}
+                height={30}
               />
               - Esquerda
             </li>
-            <br />
             <li>
               <Image
                 src={imgDireita}
                 alt="Tecla D"
-                width={comandWidth}
-                height={comandHeight}
+                width={30}
+                height={30}
               />
               - Direita
             </li>
-            <br />
             <li>
               <Image
                 src={imgBaixo}
                 alt="Tecla S"
-                width={comandWidth}
-                height={comandHeight}
+                width={30}
+                height={30}
               />
               - Acelerar
             </li>
-            <br />
             <li>
               <Image
                 src={imgGirar}
                 alt="Tecla W"
-                width={comandWidth}
-                height={comandHeight}
+                width={30}
+                height={30}
               />
               - Girar
             </li>
           </ul>
         </Controls>
       </GamePoint>
-        
     </PageWrapper>
   );
 };
