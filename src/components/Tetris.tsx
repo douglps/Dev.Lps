@@ -8,11 +8,16 @@ import imgGirar from "@/images/utils/w-key.png";
 import imgEsquerda from "@/images/utils/a-key.png";
 import imgBaixo from "@/images/utils/s-key.png";
 import imgDireita from "@/images/utils/d-key.png";
+import imgLeft from "@/images/utils/left.svg";
+import imgRotate from "@/images/utils/rotate.svg";
+import imgRight from "@/images/utils/right.svg";
+import imgDown from "@/images/utils/down.svg";
 
 // Dimensões do tabuleiro em blocos
 const BOARD_WIDTH = 16;
 const BOARD_HEIGHT = 27; // Ajustado para corresponder à altura do canvas (405px / 15px por bloco = 27)
 const BLOCK_SIZE = 15; // Tamanho de cada bloco em pixels
+const CONTROL_SIZE = 30; // Tamanho de cada controle em pixels
 
 const PageWrapper = styled.div`
   display: flex;
@@ -26,6 +31,7 @@ const PageWrapper = styled.div`
   font-family: monospace;
   position: relative;
   padding: 2rem;
+  user-select: none;
   @media (max-width: 420px) {
     flex-direction: column;
     flex-wrap: wrap;
@@ -33,24 +39,24 @@ const PageWrapper = styled.div`
 `;
 
 const MobileControls = styled.div`
-    display: flex;
-    gap: 1rem;
-    flex-wrap: nowrap;
-    justify-content: center;
-    margin-top: 2rem;
-  
+  display: flex;
+  gap: 2rem;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin-top: 2rem;
 `;
 
 const MobileButton = styled.button`
-  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 2rem;
   border-radius: 50%;
-  min-width: 60px;
-  min-height: 60px;
-  background: var(--cor-laranja-primaria);
+  min-width: 45px;
+  min-height: 45px;
+  background: #353535;
   color: black;
   border: none;
-  cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   &:active {
@@ -136,6 +142,8 @@ const NextPieceContainer = styled.div`
   margin-top: 1rem;
   text-align: center;
   align-items: center;
+  height: 9rem;
+  width: 100%;
   padding: 1rem;
   color: ${(props) => props.theme.colors.letras};
   background: #353535;
@@ -145,7 +153,7 @@ const NextPieceContainer = styled.div`
 
 const NextPieceGrid = styled.div`
   display: inline-block;
-  border: 1px solid #444;
+  border: 1px solid #11f041;
   background: #222;
   padding: 5px;
   border-radius: 4px;
@@ -191,6 +199,10 @@ const Aside = styled.div`
   text-align: left;
   text-indent: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  ul {
+    list-style: none; 
+  }
   @media (max-width: 768px) {
     display: none;
   }
@@ -211,9 +223,10 @@ const Controls = styled.div`
   ul {
     list-style: none; /* Remove bullet points */
     padding: 0;
-  }
-
-  li {
+    }
+    
+    li {
+      list-style: none
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
@@ -672,44 +685,47 @@ const Tetris404: React.FC = () => {
             onTouchStart={() => startRepeatingAction(() => playerMove(-1))}
             onTouchEnd={stopRepeatingAction}
           >
-            ⬅️
+            <Image src={imgLeft} alt="Tecla A" width={CONTROL_SIZE} height={CONTROL_SIZE} />
           </MobileButton>
-          <MobileButton onClick={() => playerRotate()}>🔄</MobileButton>
+          <MobileButton onClick={() => playerRotate()}>
+            <Image src={imgRotate} alt="Tecla W" width={CONTROL_SIZE} height={CONTROL_SIZE} />
+          </MobileButton>
           <MobileButton
             onMouseDown={() => startRepeatingAction(() => playerMove(1))}
             onMouseUp={stopRepeatingAction}
             onTouchStart={() => startRepeatingAction(() => playerMove(1))}
             onTouchEnd={stopRepeatingAction}
           >
-            ➡️
+            <Image src={imgRight} alt="Tecla D" width={CONTROL_SIZE} height={CONTROL_SIZE} />
           </MobileButton>
           <MobileButton
-            onMouseDown={() => startRepeatingAction(() => playerDrop())}
+            onMouseDown={() => startRepeatingAction(() => playerDrop(), 50)}
             onMouseUp={stopRepeatingAction}
-            onTouchStart={() => startRepeatingAction(() => playerDrop())}
+            onTouchStart={() => startRepeatingAction(() => playerDrop(), 50)}
             onTouchEnd={stopRepeatingAction}
           >
-            ⬇️
+            <Image src={imgDown} alt="Tecla S" width={CONTROL_SIZE} height={CONTROL_SIZE} />
           </MobileButton>
         </MobileControls>
       </Game>
       <GamePoint>
         <Aside>
+          <p>CONTROLES:</p><p> </p>
           <ul>
             <li>
-              <Image src={imgEsquerda} alt="Tecla A" width={30} height={30} />-
+              <Image src={imgEsquerda} alt="Tecla A" width={CONTROL_SIZE} height={CONTROL_SIZE} />-
               Esquerda
             </li>
             <li>
-              <Image src={imgDireita} alt="Tecla D" width={30} height={30} />-
+              <Image src={imgDireita} alt="Tecla D" width={CONTROL_SIZE} height={CONTROL_SIZE} />-
               Direita
             </li>
             <li>
-              <Image src={imgBaixo} alt="Tecla S" width={30} height={30} />-
+              <Image src={imgBaixo} alt="Tecla S" width={CONTROL_SIZE} height={CONTROL_SIZE} />-
               Acelerar
             </li>
             <li>
-              <Image src={imgGirar} alt="Tecla W" width={30} height={30} />-
+              <Image src={imgGirar} alt="Tecla W" width={CONTROL_SIZE} height={CONTROL_SIZE} />-
               Girar
             </li>
           </ul>
