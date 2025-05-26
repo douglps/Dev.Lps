@@ -25,8 +25,10 @@ export default function Document() {
          <meta name="theme-color" content="#11f041" />
 
         {/* Google Analytics tag - Mantenha ele aqui no Head */}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-L7QMN988BD"></Script>
+        <Script id="google-analytics-script" strategy="afterInteractive" async src="https://www.googletagmanager.com/gtag/js?id=G-L7QMN988BD"></Script>
         <Script
+          id="google-analytics-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
