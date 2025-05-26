@@ -18,10 +18,11 @@ import {
 import thumbPortfolioImage from "@/images/use/thumb-portfolio.avif";
 import html5Icon from "@/images/skills/html5.svg";
 import cssIcon from "@/images/skills/css.svg";
-import sassIcon from "@/images/skills/sass.svg";
 import javascriptIcon from "@/images/skills/javascript.svg";
 import typescriptIcon from "@/images/skills/typescript.svg";
 import reactIcon from "@/images/skills/react.svg";
+import nodeIcon from "@/images/skills/nodejs.svg";
+import nextIcon from "@/images/skills/nextjs.svg";
 import gitIcon from "@/images/skills/git.svg";
 import windowsIcon from "@/images/skills/windows.svg";
 import vscodeIcon from "@/images/skills/vs-code.svg";
@@ -64,13 +65,22 @@ export function MeuPortfolio() {
                 </div>
                 <div className="grid__portfolio--skills">
                   <div className="skill-portfolio">
-                    <Image src={html5Icon} alt="HTML5" width={48} height={48} />
+                    <Image
+                      src={html5Icon}
+                      alt="HTML5"
+                      width={48}
+                      height={48}
+                      title="HTML5"
+                    />
                   </div>
                   <div className="skill-portfolio">
-                    <Image src={cssIcon} alt="CSS" width={48} height={48} />
-                  </div>
-                  <div className="skill-portfolio">
-                    <Image src={sassIcon} alt="SASS" width={48} height={48} />
+                    <Image
+                      src={cssIcon}
+                      alt="CSS"
+                      width={48}
+                      height={48}
+                      title="CSS"
+                    />
                   </div>
                   <div className="skill-portfolio">
                     <Image
@@ -78,6 +88,7 @@ export function MeuPortfolio() {
                       alt="JavaScript"
                       width={48}
                       height={48}
+                      title="JavaScript"
                     />
                   </div>
                   <div className="skill-portfolio">
@@ -86,13 +97,44 @@ export function MeuPortfolio() {
                       alt="TypeScript"
                       width={48}
                       height={48}
+                      title="TypeScript"
                     />
                   </div>
                   <div className="skill-portfolio">
-                    <Image src={reactIcon} alt="React" width={48} height={48} />
+                    <Image
+                      src={reactIcon}
+                      alt="React"
+                      width={48}
+                      height={48}
+                      title="React"
+                    />
                   </div>
                   <div className="skill-portfolio">
-                    <Image src={gitIcon} alt="Git" width={48} height={48} />
+                    <Image
+                      src={nodeIcon}
+                      alt="Node JS"
+                      width={48}
+                      height={48}
+                      title="Node JS"
+                    />
+                  </div>
+                  <div className="skill-portfolio">
+                    <Image
+                      src={nextIcon}
+                      alt="Next.JS"
+                      width={48}
+                      height={48}
+                      title="Next.JS"
+                    />
+                  </div>
+                  <div className="skill-portfolio">
+                    <Image
+                      src={gitIcon}
+                      alt="Git"
+                      width={48}
+                      height={48}
+                      title="Git"
+                    />
                   </div>
                   <div className="skill-portfolio">
                     <Image
@@ -100,6 +142,7 @@ export function MeuPortfolio() {
                       alt="Windows"
                       width={48}
                       height={48}
+                      title="Windows"
                     />
                   </div>
                   <div className="skill-portfolio">
@@ -108,6 +151,7 @@ export function MeuPortfolio() {
                       alt="Visual Studio Code"
                       width={48}
                       height={48}
+                      title="Visual Studio Code"
                     />
                   </div>
                   <div className="skill-portfolio">
@@ -116,6 +160,7 @@ export function MeuPortfolio() {
                       alt="Vercel Hospedagem"
                       width={48}
                       height={48}
+                      title="Vercel Hospedagem"
                     />
                   </div>
                 </div>

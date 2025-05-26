@@ -62,7 +62,7 @@ h1 {
 h2 {
   font-size: 1.8rem;
   font-weight: 400;
-  text-shadow: 1px 1px 1px #a7a7a7, 0 0 1em #5e5913, 0 0 0.2em #121212;
+  text-shadow: 0.1rem 0rem 0.3rem #121212;
   font-family: audiowide, sans-serif;
   padding-top: 1rem;
 }
@@ -342,12 +342,22 @@ img {
   align-items: center;
   background-color: rgb(35, 35, 35);
   width: 88%;
-  height: 12rem;
+  height: 14rem;
   margin: 3rem;
   padding: 1.5rem;
   text-align: left;
   border-radius: 0.5rem;
   border-left: 0.3rem var(--cor-verde-primaria) solid;
+}
+@media screen and (max-width: 600px) {
+  .terminal {
+    height: 16rem;
+  }
+}
+@media screen and (max-width: 420px) {
+  .terminal {
+    height: 20rem;
+  }
 }
 
 .code {

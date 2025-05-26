@@ -1,6 +1,10 @@
 {
   "name": "Dev.Lps | Douglas Lopes Dev",
   "short_name": "Dev.Lps",
+  "description": "Desenvolvedor Full Stack | Douglas Lopes Dev. Sites, Aplicativos, Sistemas e muito mais.",
+  "scope": "/",
+  "start_url": "/",
+  "lang": "pt-BR",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

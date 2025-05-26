@@ -126,12 +126,11 @@ const EmailPopupEmailBox = styled.div`
 `;
 
 const EmailPopupMailto = styled.a`
-  color: var(
-    --letras
+  color: ${(props) => props.theme.colors.letras};
   ); /* Assuming --letras is defined globally or via ThemeProvider */
   text-decoration: none;
   font-size: 1.4rem;
-
+  
   &:hover {
     text-decoration: underline;
   }

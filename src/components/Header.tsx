@@ -104,11 +104,14 @@ const Logo = styled.div`
 
 // Estilos para o texto do logotipo
 const DevLpsText = styled.div`
-  font-family: ${audiowide.style.fontFamily};
-  font-size: 2.5rem;
-  margin-left: 0.5rem;
-  letter-spacing: 0rem;
-  color: ${(props) => props.theme.colors.letras};
+  & > a {
+    text-decoration: none;
+    font-family: ${audiowide.style.fontFamily};
+    font-size: 2.5rem;
+    margin-left: 0.5rem;
+    letter-spacing: 0rem;
+    color: ${(props) => props.theme.colors.letras};
+  }
 
   @media (max-width: 480px) {
     display: none;
@@ -377,7 +380,9 @@ export function Header() {
               <Image src={logoImage} alt="Logotipo" />
             </Link>
           </StyledLogoWrapper>
-          <DevLpsText>Dev.Lps</DevLpsText>
+          <DevLpsText>
+            <Link href="/">Dev.Lps</Link>
+          </DevLpsText>
         </Logo>
 
         {isMobile && (

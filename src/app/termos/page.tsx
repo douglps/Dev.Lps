@@ -2,31 +2,39 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
+import styled from "styled-components";
 import * as S from "@/src/styles/PrivacidadeStyled";
 
 import cafe from "@/images/utils/coffee-pr.svg";
 
-
-
 const COFFEE_ICON_WIDTH = 24;
 const COFFEE_ICON_HEIGHT = 24;
+
+const FontWeight = styled.span`
+  font-weight: 700;
+`;
 
 export default function TermoUsoPage() {
   const handleNavClick = (id: string) => `#${id}`;
 
   const sections = [
-    { id: "identificacao", label: "1. Identificação" },
-    { id: "finalidadetermos", label: "2. Finalidade do Site" },
-    { id: "doacoes", label: "3. Contribuições Voluntárias" },
-    { id: "direitostermos", label: "4. Direitos Autorais" },
-    { id: "uso", label: "5. Uso Permitido e Proibido" },
-    { id: "responsabilidade", label: "6. Responsabilidades e Isenções" },
-    { id: "links", label: "7. Links Externos" },
-    { id: "formulario", label: "8. Formulários e Interação" },
-    { id: "modificacoes", label: "9. Modificações dos Termos" },
-    { id: "privacidadetermos", label: "10. Privacidade e Dados" },
-    { id: "contatotermos", label: "11. Contato" },
+    { id: "proposito-website", label: "1. Do Propósito do Website" },
+    { id: "seguranca-informacao", label: "2. Segurança da Informação" },
+    {
+      id: "contribuicoes-voluntarias",
+      label: "3. Das Contribuições Voluntárias",
+    },
+    { id: "direitos-autorais", label: "4. Direitos Autorais" },
+    { id: "uso-permitido-proibido", label: "5. Uso Permitido e Proibido" },
+    {
+      id: "responsabilidades-isencoes",
+      label: "6. Das Responsabilidades e Isenções",
+    },
+    { id: "links-externos", label: "7. Dos Links Externos" },
+    { id: "interacao-formularios", label: "8. Da Interação com Formulários" },
+    { id: "modificacoes-termos", label: "9. Das Modificações dos Termos" },
+    { id: "privacidade-dados", label: "10. Da Privacidade e Dados Pessoais" },
+    { id: "contato", label: "11. Contato" },
   ];
 
   return (
@@ -48,156 +56,206 @@ export default function TermoUsoPage() {
         </S.PrivacidadeNavegacao>
 
         <S.PrivacidadeContainerConteudo aria-label="Conteúdo dos Termos de Uso">
-          <h1 id="titulo-termos-uso">TERMO DE USO</h1>
+          <h1 id="titulo-termos-uso">TERMOS DE USO</h1>
           <p>
-            <strong>Última atualização:</strong> 16/05/2025
+            <strong>Última atualização:</strong> 26/05/2025
           </p>
 
-          <h2 id="identificacao">1. Identificação</h2>
-          <ul>
-            <li>
-              <strong>Nome:</strong> Douglas Lopes
-            </li>
-            <li>
-              <strong>E-mail:</strong> dl.douglaslps@gmail.com
-            </li>
-            <li>
-              <strong>Website:</strong>{" "}
-              <S.PrivSpanLink
-                as="a"
-                href="https://devlps.vercel.app/"
-                target="_blank"
-              >
-                https://devlps.vercel.app/
-              </S.PrivSpanLink>
-            </li>
-            <li>
-              <strong>Jurisdicional:</strong> Brasil
-            </li>
-          </ul>
-
-          <h2 id="finalidadetermos">2. Finalidade do Site</h2>
+          {/* Preâmbulo */}
           <p>
-            Este site apresenta o portfólio profissional de Douglas Lopes, com
-            exibição de projetos, ideias e soluções visuais. Além do caráter
-            informativo e demonstrativo, o site pode ser monetizado por meio de:
+            Este documento estabelece os Termos de Uso aplicáveis à navegação e
+            utilização do portfólio profissional online{" "}
+            <FontWeight>Dev.Lps</FontWeight>, de propriedade e operado pelo
+            <FontWeight> titular</FontWeight> (doravante denominado "Titular").
+            Ao acessar e utilizar este website, o{" "}
+            <FontWeight>usuário</FontWeight> (doravante denominado "Usuário")
+            manifesta sua aceitação integral e incondicional das condições aqui
+            dispostas.
+          </p>
+
+          {/* Seção 1: Do Propósito do Website */}
+          <h2 id="proposito-website">1. Do Propósito do Website</h2>
+          <p>
+            1.1. O presente website destina-se primariamente à exibição de
+            portfólio profissional, apresentando projetos, conceitos e soluções
+            visuais desenvolvidas pelo <FontWeight>Titular</FontWeight>.
+          </p>
+          <p>
+            1.2. Adicionalmente ao seu caráter informativo e demonstrativo, o
+            website poderá, a critério exclusivo do <FontWeight>Titular</FontWeight>,
+            ser monetizado por meio de:
           </p>
           <ul>
-            <li>Exibição de anúncios e parcerias;</li>
-            <li>Venda de serviços criativos e/ou digitais;</li>
-            <li>Oferta de conteúdos exclusivos ou sob demanda.</li>
+            <li>a) Exibição de publicidade e parcerias comerciais.</li>
+            <li>b) Oferta de serviços criativos e/ou digitais.</li>
+            <li>c) Disponibilização de conteúdos exclusivos ou sob demanda.</li>
           </ul>
           <p>
-            Adicionalmente, o usuário pode, de forma espontânea, contribuir com
-            o projeto por meio de doações voluntárias via <strong>PIX</strong>,
-            cuja chave é disponibilizada de forma visível no site.
+            1.3. O <FontWeight>Usuário</FontWeight> poderá, a seu critério e de forma
+            espontânea, realizar contribuições voluntárias para o projeto,
+            conforme detalhado na Seção 3.
           </p>
 
-          <h2 id="doacoes">3. Contribuições Voluntárias (Doações)</h2>
+          {/* Seção 2: Segurança da Informação */}
+          <h2 id="seguranca-informacao">2. Segurança da Informação</h2>
           <p>
-            Usuários que desejarem apoiar este projeto de forma espontânea podem
-            realizar contribuições financeiras via <strong>PIX</strong>. Essa
-            colaboração é opcional e destinada a incentivar a continuidade da
-            produção de conteúdo, melhorias técnicas e manutenção do site.
+            2.1. O <FontWeight>Titular</FontWeight> emprega medidas técnicas e
+            organizacionais razoáveis para proteger a segurança das informações
+            do website contra acessos não autorizados, perdas ou alterações
+            indevidas.
           </p>
-          <ul>
-            <li>
-              <strong>Chave PIX (fixa):</strong> exibida no menu lateral em{" "}
-              <S.Cafezin>
-                <Link href="/cafe">
-                  (Contribua com um café){" "}
-                  <Image
-                    src={cafe}
-                    alt="Ícone de café para contribuir com um café"
-                    width={COFFEE_ICON_WIDTH}
-                    height={COFFEE_ICON_HEIGHT}
-                  />
-                </Link>
-              </S.Cafezin>
-              .
-            </li>
-            <li>
-              As doações são consideradas <em>não reembolsáveis</em> e não
-              vinculam o autor a obrigações de entrega de produto ou serviço.
-            </li>
-            <li>
-              A realização da doação implica no aceite voluntário e consciente
-              desta condição.
-            </li>
-          </ul>
-
-          <h2 id="direitostermos">4. Direitos Autorais</h2>
           <p>
-            Todo o conteúdo presente é de propriedade intelectual de Douglas
-            Lopes, salvo quando indicado o contrário. É proibida a reprodução,
-            cópia, modificação, redistribuição ou uso comercial sem autorização
-            expressa.
+            2.2. Embora o <FontWeight>Titular</FontWeight> se esforce para
+            proteger o ambiente digital, não é possível garantir a segurança
+            absoluta de qualquer sistema online. O <FontWeight>Usuário</FontWeight>
+            reconhece e concorda que a transmissão de informações pela internet
+            possui riscos inerentes.
           </p>
 
-          <h2 id="uso">5. Uso Permitido e Proibido</h2>
-          <ul>
-            <li>
-              <strong>Permitido:</strong> Navegar, visualizar e compartilhar o
-              link do site.
-            </li>
-            <li>
-              <strong>Proibido:</strong> Copiar projetos, usar para fins
-              comerciais ou acadêmicos sem permissão, atribuir autoria indevida.
-            </li>
-          </ul>
-
-          <h2 id="responsabilidade">6. Responsabilidades e Isenções</h2>
+          {/* Seção 3: Das Contribuições Voluntárias */}
+          <h2 id="contribuicoes-voluntarias">
+            3. Das Contribuições Voluntárias
+          </h2>
           <p>
-            O titular não se responsabiliza por falhas técnicas,
-            indisponibilidade temporária, ou danos decorrentes da interpretação
-            do conteúdo.
+            3.1. O <FontWeight>Titular</FontWeight> disponibiliza mecanismos para
+            que <FontWeight>Usuários</FontWeight> interessados possam realizar
+            contribuições financeiras de natureza voluntária, visando apoiar o
+            desenvolvimento contínuo e a manutenção deste projeto.
           </p>
-
-          <h2 id="links">7. Links Externos</h2>
           <p>
-            O site pode conter links para terceiros. O titular não se
-            responsabiliza por políticas, conteúdos ou práticas externas.
-          </p>
-
-          <h2 id="formulario">8. Formulários e Interação</h2>
-          <p>
-            O uso dos formulários deve ser feito com informações verdadeiras.
-            Envios maliciosos, spam ou ofensivos podem ser bloqueados e
-            denunciados.
-          </p>
-
-          <h2 id="modificacoes">9. Modificações dos Termos</h2>
-          <p>
-            Este termo pode ser alterado a qualquer momento, sem aviso prévio.
-            Recomenda-se leitura periódica.
-          </p>
-
-          <h2 id="privacidadetermos">10. Privacidade e Dados</h2>
-          <p>
-            Para informações sobre coleta e tratamento de dados pessoais, acesse
-            a{" "}
-            <Link href="/privacidade">
-              <S.PrivSpanLink as="span">Política de Privacidade</S.PrivSpanLink>
-            </Link>
+            3.2. A chave para a realização de tais contribuições será
+            explicitamente indicada em seção específica do website
+            <S.Cafezin>
+              <Link href="/cafe">
+                {" "}
+                (Contribua com um café){" "}
+                <Image
+                  src={cafe}
+                  alt="Ícone de café para contribuir com um café"
+                  width={COFFEE_ICON_WIDTH}
+                  height={COFFEE_ICON_HEIGHT}
+                />
+              </Link>
+            </S.Cafezin>
             .
           </p>
+          <p>
+            3.3. As contribuições efetuadas são consideradas{" "}
+            <FontWeight>não reembolsáveis</FontWeight> e não vinculam o{" "}
+            <FontWeight>Titular</FontWeight> a qualquer obrigação de entrega de
+            produto ou serviço.
+          </p>
+          <p>
+            3.4. A realização da contribuição implica na aceitação plena e
+            consciente destas condições pelo <FontWeight>Usuário</FontWeight>.
+          </p>
 
-          <h2 id="contatotermos">11. Contato</h2>
+          {/* Seção 4: Direitos Autorais */}
+          <h2 id="direitos-autorais">4. Direitos Autorais</h2>
+          <p>
+            4.1. Todo o conteúdo presente neste website é{" "}
+            <FontWeight>propriedade intelectual do Titular</FontWeight>, salvo
+            quando expressamente indicado em contrário.
+          </p>
+          <p>
+            4.2. É estritamente{" "}
+            <FontWeight>
+              proibida a reprodução, cópia, modificação, redistribuição ou uso
+              comercial
+            </FontWeight>{" "}
+            de qualquer material sem autorização prévia e expressa do{" "}
+            <FontWeight>Titular</FontWeight>.
+          </p>
+
+          {/* Seção 5: Uso Permitido e Proibido */}
+          <h2 id="uso-permitido-proibido">5. Uso Permitido e Proibido</h2>
           <ul>
             <li>
-              <strong>E-mail:</strong> dl.douglaslps@gmail.com
+              <FontWeight>Permitido</FontWeight>: A navegação pelo site, a
+              visualização do conteúdo e o compartilhamento do link de acesso
+              são permitidos ao <FontWeight>Usuário</FontWeight>.
             </li>
             <li>
-              <strong>Website:</strong>{" "}
-              <S.PrivSpanLink
-                as="a"
-                href="https://devlps.vercel.app/"
-                target="_blank"
-              >
-                https://devlps.vercel.app/
-              </S.PrivSpanLink>
+              <FontWeight>Proibido</FontWeight>: É vedado ao{" "}
+              <FontWeight>Usuário</FontWeight> copiar ou reproduzir projetos,
+              utilizar o conteúdo para fins comerciais ou acadêmicos sem
+              permissão explícita do <FontWeight>Titular</FontWeight>, ou
+              atribuir autoria indevida a qualquer material exibido neste
+              website.
             </li>
           </ul>
+
+          {/* Seção 6: Das Responsabilidades e Isenções */}
+          <h2 id="responsabilidades-isencoes">
+            6. Das Responsabilidades e Isenções
+          </h2>
+          <p>
+            6.1. O <FontWeight>Titular</FontWeight> deste portfólio{" "}
+            <FontWeight>não se responsabiliza</FontWeight> por falhas técnicas,
+            indisponibilidade temporária do serviço ou por quaisquer danos
+            diretos ou indiretos decorrentes da interpretação ou uso do conteúdo
+            aqui apresentado pelo <FontWeight>Usuário</FontWeight>.
+          </p>
+
+          {/* Seção 7: Dos Links Externos */}
+          <h2 id="links-externos">7. Dos Links Externos</h2>
+          <p>
+            7.1. Este website poderá conter links para{" "}
+            <FontWeight>websites de terceiros</FontWeight>. O{" "}
+            <FontWeight>Titular</FontWeight>{" "}
+            <FontWeight>não se responsabiliza</FontWeight> pelas políticas,
+            conteúdos ou práticas de privacidade de sites externos.
+          </p>
+
+          {/* Seção 8: Da Interação com Formulários */}
+          <h2 id="interacao-formularios">8. Da Interação com Formulários</h2>
+          <p>
+            8.1. A utilização de quaisquer formulários de contato ou interação
+            no site deve ser feita pelo <FontWeight>Usuário</FontWeight> com{" "}
+            <FontWeight>informações verdadeiras e precisas</FontWeight>. Envios
+            maliciosos, spam ou conteúdos ofensivos poderão ser bloqueados e, se
+            necessário, reportados às autoridades competentes pelo{" "}
+            <FontWeight>Titular</FontWeight>.
+          </p>
+
+          {/* Seção 9: Das Modificações dos Termos */}
+          <h2 id="modificacoes-termos">9. Das Modificações dos Termos</h2>
+          <p>
+            9.1. Estes Termos de Uso{" "}
+            <FontWeight>poderão ser alterados a qualquer momento</FontWeight> e
+            sem aviso prévio. Recomenda-se a revisão periódica deste documento
+            pelo <FontWeight>Usuário</FontWeight> para se manter atualizado
+            sobre as condições de uso.
+          </p>
+
+          {/* Seção 10: Da Privacidade e Dados Pessoais */}
+          <h2 id="privacidade-dados">10. Da Privacidade e Dados Pessoais</h2>
+          <p>
+            10.1. Para informações detalhadas sobre a coleta, tratamento e uso
+            de dados pessoais, por favor, consulte a{" "}
+            <Link href="/privacidade">
+              <S.PrivSpanLink as="span">Política de Privacidade</S.PrivSpanLink>
+            </Link>{" "}
+            específica deste website.
+          </p>
+
+          {/* Seção 11: Contato */}
+          <h2 id="contato">11. Contato</h2>
+          <p>
+            11.1. Para quaisquer dúvidas ou esclarecimentos relacionados a estes
+            Termos de Uso, o <FontWeight>Usuário</FontWeight> pode entrar em
+            contato através do e-mail{" "}
+            <FontWeight>dl.douglaslps@gmail.com</FontWeight> ou visitar nosso
+            website em{" "}
+            <S.PrivSpanLink
+              as="a"
+              href="https://devlps.vercel.app/"
+              target="_blank"
+            >
+              <FontWeight>https://devlps.vercel.app/</FontWeight>
+            </S.PrivSpanLink>
+            .
+          </p>
         </S.PrivacidadeContainerConteudo>
       </S.PrivacidadeGrid>
     </S.ContainerPrivacidade>

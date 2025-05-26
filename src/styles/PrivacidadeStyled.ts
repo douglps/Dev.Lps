@@ -13,7 +13,7 @@ export const ContainerPrivacidade = styled.section`
 
 export const PrivacidadeGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1.5fr 3fr;
   gap: 2rem;
   padding: 2rem;
   max-width: 1200px;
@@ -95,7 +95,6 @@ export const PrivacidadeContainerConteudo = styled.div`
     font-size: 1.8rem;
     color: var(--letras);
     text-shadow: none;
-    font-weight: 600;
   }
 
   ul {

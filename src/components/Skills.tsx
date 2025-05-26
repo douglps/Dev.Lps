@@ -21,6 +21,7 @@ import bootstrapIcon from "@/images/skills/bootstrap.svg";
 import pythonIcon from "@/images/skills/python.svg";
 import typeIcon from "@/images/skills/typescript.svg";
 import nodejsIcon from "@/images/skills/nodejs.svg";
+import nextjsIcon from "@/images/skills/nextjs-br.svg";
 import jsonIcon from "@/images/skills/json.svg";
 import figmaIcon from "@/images/skills/figma.svg";
 import canvaIcon from "@/images/skills/canva.svg";
@@ -38,13 +39,13 @@ import {
   AbasMore,
   AbasContainer,
   Citacao,
-  SkillsSwiperContainer, 
+  SkillsSwiperContainer,
   SkillCardContent,
   SkillIconAnimatedBackground,
   SkillIconBackground,
   SkillWrapper,
   SkillName,
-} from "@/src/styles/SkillsStyled"; 
+} from "@/src/styles/SkillsStyled";
 
 const SKILL_ICON_WIDTH = 64;
 const SKILL_ICON_HEIGHT = 64;
@@ -102,6 +103,7 @@ export function Skills() {
     { src: pythonIcon.src, alt: "Python", name: "Python" },
     { src: typeIcon.src, alt: "TypeScript", name: "TypeScript" },
     { src: nodejsIcon.src, alt: "Node.Js", name: "Node.Js" },
+    { src: nextjsIcon.src, alt: "Next.Js", name: "Next.Js" },
     { src: jsonIcon.src, alt: "JSON", name: "JSON" },
     { src: figmaIcon.src, alt: "Figma", name: "Figma" },
     { src: canvaIcon.src, alt: "Canva", name: "Canva" },
@@ -142,7 +144,6 @@ export function Skills() {
           {isSmallScreen ? abasTextContent[4].short : abasTextContent[4].long}
         </div>
       </AbasContainer>
-
 
       <AbasMore $isOpen={openDiv === 1}>
         <p>
@@ -234,8 +235,12 @@ export function Skills() {
         >
           {skills.map((skill, index) => (
             <SwiperSlide key={index}>
-              <SkillCardContent> {/* Componente para .skills__container--content */}
-                <SkillWrapper> {/* Componente para .skill */}
+              <SkillCardContent>
+                {" "}
+                {/* Componente para .skills__container--content */}
+                <SkillWrapper>
+                  {" "}
+                  {/* Componente para .skill */}
                   <SkillIconAnimatedBackground>
                     <SkillIconBackground>
                       <Image
@@ -248,7 +253,8 @@ export function Skills() {
                       />
                     </SkillIconBackground>
                   </SkillIconAnimatedBackground>
-                  <SkillName>{skill.name}</SkillName> {/* Componente para .skill--nome */}
+                  <SkillName>{skill.name}</SkillName>{" "}
+                  {/* Componente para .skill--nome */}
                 </SkillWrapper>
               </SkillCardContent>
             </SwiperSlide>
