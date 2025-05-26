@@ -177,11 +177,26 @@ const RulesOverlay = styled(Overlay)`
   z-index: 12;
   overflow-y: auto;
   height: 70%;
-  align-self: center; /* Centraliza verticalmente */
+  align-self: center;
   scrollbar-width: thin;
   scrollbar-color: green white;
-  padding-top: 5rem; /* Espaçamento superior para o conteúdo */
-  box-sizing: border-box; /* Inclui padding na altura */
+  padding-top: 5rem;
+  box-sizing: border-box;
+`;
+
+const Aside = styled.div`
+  display: flex;
+  flex-direction: column;
+  background: #353535;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px;
+  text-align: left;
+  text-indent: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Controls = styled.div`
@@ -194,8 +209,6 @@ const Controls = styled.div`
   text-align: left;
   text-indent: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  @media (max-width: 768px) {
-    display: none;
   }
 
   ul {
@@ -321,9 +334,34 @@ const Tetris404: React.FC = () => {
   const [nextPiece, setNextPiece] = useState<number[][]>([]);
   const [showRules, setShowRules] = useState(false);
 
+  const intervalRef = useRef<number | null>(null);
+
+  const startRepeatingAction = useCallback(
+    (action: () => void, delay: number = 150) => {
+      // Limpa qualquer intervalo existente antes de iniciar um novo
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+      action(); // Executa a ação imediatamente ao pressionar
+      intervalRef.current = window.setInterval(action, delay);
+    },
+    []
+  );
+
+  // Função para parar a repetição de uma ação
+  const stopRepeatingAction = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, []);
+
   // Refs para o estado do jogo que não causam re-renderização
   const matrixRef = useRef(createMatrix(BOARD_WIDTH, BOARD_HEIGHT));
-  const playerRef = useRef<Player>({ pos: { x: 0, y: 0 }, matrix: TETROMINOS.T });
+  const playerRef = useRef<Player>({
+    pos: { x: 0, y: 0 },
+    matrix: TETROMINOS.T,
+  });
   const nextPieceRef = useRef<number[][]>([]); // Inicializado vazio, será preenchido no primeiro randomPiece
 
   // Funções de lógica do jogo memorizadas com useCallback
@@ -421,11 +459,14 @@ const Tetris404: React.FC = () => {
     }
   }, [collide, merge, sweepRows, setScore, setLevel, playerReset]);
 
-  const playerMove = useCallback((dir: number) => {
-    const player = playerRef.current;
-    player.pos.x += dir;
-    if (collide(matrixRef.current, player)) player.pos.x -= dir; // Volta se colidiu
-  }, [collide]);
+  const playerMove = useCallback(
+    (dir: number) => {
+      const player = playerRef.current;
+      player.pos.x += dir;
+      if (collide(matrixRef.current, player)) player.pos.x -= dir; // Volta se colidiu
+    },
+    [collide]
+  );
 
   const playerRotate = useCallback(() => {
     const player = playerRef.current;
@@ -514,7 +555,15 @@ const Tetris404: React.FC = () => {
       window.removeEventListener("keydown", handleKeyDown);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [started, level, showRules, playerDrop, playerMove, playerRotate, drawMatrix]); // Dependências do useEffect
+  }, [
+    started,
+    level,
+    showRules,
+    playerDrop,
+    playerMove,
+    playerRotate,
+    drawMatrix,
+  ]); // Dependências do useEffect
 
   // Função para reiniciar o jogo
   const handleRestart = () => {
@@ -556,30 +605,15 @@ const Tetris404: React.FC = () => {
                 Tecla A ou Seta Esquerda: Mover o bloco lateralmente à esquerda.
               </li>
               <li>
-                <Image
-                  src={imgDireita}
-                  alt="Tecla D"
-                  width={30}
-                  height={30}
-                />{" "}
+                <Image src={imgDireita} alt="Tecla D" width={30} height={30} />{" "}
                 Tecla D ou Seta Direita: Mover o bloco lateralmente à direita.
               </li>
               <li>
-                <Image
-                  src={imgBaixo}
-                  alt="Tecla S"
-                  width={30}
-                  height={30}
-                />{" "}
+                <Image src={imgBaixo} alt="Tecla S" width={30} height={30} />{" "}
                 Tecla S ou Seta Baixo: Acelerar a queda do bloco (soft drop).
               </li>
               <li>
-                <Image
-                  src={imgGirar}
-                  alt="Tecla W"
-                  width={30}
-                  height={30}
-                />{" "}
+                <Image src={imgGirar} alt="Tecla W" width={30} height={30} />{" "}
                 Tecla W ou Seta Cima: Rotacionar o bloco.
               </li>
             </ul>
@@ -635,53 +669,61 @@ const Tetris404: React.FC = () => {
           height={BOARD_HEIGHT * BLOCK_SIZE} // 27 * 15 = 405
         />
         <MobileControls>
-          <MobileButton onClick={() => playerMove(-1)}>⬅️</MobileButton>
-          <MobileButton onClick={() => playerRotate()}>🔄</MobileButton>
-          <MobileButton onClick={() => playerMove(1)}>➡️</MobileButton>
-          <MobileButton onClick={() => playerDrop()}>⬇️</MobileButton>
+          <MobileButton
+            onMouseDown={() => startRepeatingAction(() => playerMove(-1))}
+            onMouseUp={stopRepeatingAction}
+            onTouchStart={() => startRepeatingAction(() => playerMove(-1))}
+            onTouchEnd={stopRepeatingAction}
+          >
+            ⬅️
+          </MobileButton>
+          <MobileButton
+            onMouseDown={() => startRepeatingAction(() => playerRotate())}
+            onMouseUp={stopRepeatingAction}
+            onTouchStart={() => startRepeatingAction(() => playerRotate())}
+            onTouchEnd={stopRepeatingAction}
+          >
+            🔄
+          </MobileButton>
+          <MobileButton
+            onMouseDown={() => startRepeatingAction(() => playerMove(1))}
+            onMouseUp={stopRepeatingAction}
+            onTouchStart={() => startRepeatingAction(() => playerMove(1))}
+            onTouchEnd={stopRepeatingAction}
+          >
+            ➡️
+          </MobileButton>
+          <MobileButton
+            onMouseDown={() => startRepeatingAction(() => playerDrop())}
+            onMouseUp={stopRepeatingAction}
+            onTouchStart={() => startRepeatingAction(() => playerDrop())}
+            onTouchEnd={stopRepeatingAction}
+          >
+            ⬇️
+          </MobileButton>
         </MobileControls>
       </Game>
       <GamePoint>
-        <Controls>
+        <Aside>
           <ul>
             <li>
-              <Image
-                src={imgEsquerda}
-                alt="Tecla A"
-                width={30}
-                height={30}
-              />
-              - Esquerda
+              <Image src={imgEsquerda} alt="Tecla A" width={30} height={30} />-
+              Esquerda
             </li>
             <li>
-              <Image
-                src={imgDireita}
-                alt="Tecla D"
-                width={30}
-                height={30}
-              />
-              - Direita
+              <Image src={imgDireita} alt="Tecla D" width={30} height={30} />-
+              Direita
             </li>
             <li>
-              <Image
-                src={imgBaixo}
-                alt="Tecla S"
-                width={30}
-                height={30}
-              />
-              - Acelerar
+              <Image src={imgBaixo} alt="Tecla S" width={30} height={30} />-
+              Acelerar
             </li>
             <li>
-              <Image
-                src={imgGirar}
-                alt="Tecla W"
-                width={30}
-                height={30}
-              />
-              - Girar
+              <Image src={imgGirar} alt="Tecla W" width={30} height={30} />-
+              Girar
             </li>
           </ul>
-        </Controls>
+        </Aside>
       </GamePoint>
     </PageWrapper>
   );

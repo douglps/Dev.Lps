@@ -38,6 +38,9 @@ const Container = styled.div`
   text-align: justify;
   padding: 3rem;
   text-indent: 2rem;
+  & p {
+    margin: 1.6rem 0;
+  }
 
   @media (max-width: 768px) {
     width: 95%;

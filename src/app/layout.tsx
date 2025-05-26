@@ -26,7 +26,7 @@ const lato = Lato({
 
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Projetos e Trabalhos | DevLps",
+  title: "Desenvolvedor Full Stack - Douglas Lopes | DevLps",
   description:
     "Explore os projetos e trabalhos recentes de Douglas Lopes, com foco em desenvolvimento web e design.",
   openGraph: {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projetos e Trabalhos | DevLps",
+    title: "Desenvolvedor Full Stack - Douglas Lopes | DevLps",
     description:
       "Explore os projetos e trabalhos recentes de Douglas Lopes, com foco em desenvolvimento web e design.",
     images: ["https://devlps.vercel.app/og-images/logo.avif"],
@@ -66,34 +66,14 @@ export default function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <ThemeProvider>
-            {/*
-              ATENÇÃO! REMOVA OS SCRIPTS DO GOOGLE ANALYTICS DAQUI!
-              Eles DEVEM estar APENAS dentro do CookieConsentBanner.tsx
-            */}
-            {/*
-            <Script
-              src="https://www.googletagmanager.com/gtag/js?id=G-L7QMN988BD"
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', 'G-L7QMN988BD');
-              `}
-            </Script>
-            */}
-
             <GlobalStyle />
             <Header />
             <Control />
             {children}
             <Footer />
-            <CookieConsentBanner /> {/* Mantenha este aqui */}
-            <SpeedInsights /> {/* Mantenha Vercel Speed Insights */}
-            <Analytics /> {/* Mantenha Vercel Analytics */}
+            <CookieConsentBanner />
+            <SpeedInsights />
+            <Analytics />
           </ThemeProvider>
         </StyledComponentsRegistry>
       </body>
