@@ -25,7 +25,7 @@ const PageWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  height: max-content;
   gap: 2rem;
   color: white;
   font-family: monospace;
