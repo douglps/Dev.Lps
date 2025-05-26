@@ -677,12 +677,7 @@ const Tetris404: React.FC = () => {
           >
             ⬅️
           </MobileButton>
-          <MobileButton
-            onMouseDown={() => startRepeatingAction(() => playerRotate())}
-            onMouseUp={stopRepeatingAction}
-            onTouchStart={() => startRepeatingAction(() => playerRotate())}
-            onTouchEnd={stopRepeatingAction}
-          >
+          <MobileButton onClick={() => playerRotate()}>
             🔄
           </MobileButton>
           <MobileButton
