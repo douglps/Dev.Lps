@@ -33,15 +33,12 @@ const PageWrapper = styled.div`
 `;
 
 const MobileControls = styled.div`
-  display: none;
-
-  @media (max-width: 768px) {
     display: flex;
     gap: 1rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     margin-top: 2rem;
-  }
+  
 `;
 
 const MobileButton = styled.button`
@@ -337,7 +334,7 @@ const Tetris404: React.FC = () => {
   const intervalRef = useRef<number | null>(null);
 
   const startRepeatingAction = useCallback(
-    (action: () => void, delay: number = 150) => {
+    (action: () => void, delay: number = 250) => {
       // Limpa qualquer intervalo existente antes de iniciar um novo
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -677,9 +674,7 @@ const Tetris404: React.FC = () => {
           >
             ⬅️
           </MobileButton>
-          <MobileButton onClick={() => playerRotate()}>
-            🔄
-          </MobileButton>
+          <MobileButton onClick={() => playerRotate()}>🔄</MobileButton>
           <MobileButton
             onMouseDown={() => startRepeatingAction(() => playerMove(1))}
             onMouseUp={stopRepeatingAction}
