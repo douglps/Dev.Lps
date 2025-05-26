@@ -112,7 +112,7 @@ export function Footer() {
             <Link href="/privacidade">Política de Privacidade</Link>
             <Link href="/termos">Termos de Uso</Link>
           </LinkPrivacidade>
-          <Version>V.2.5.3</Version>
+          <Version>V.2.6.3</Version>
         </Copyright>
       </RodapeContainer>
     </FooterSection>

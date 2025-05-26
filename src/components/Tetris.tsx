@@ -65,6 +65,13 @@ const MobileButton = styled.button`
   }
 `;
 
+const ButtonImage = styled(Image)`
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;`
+
 const Game = styled.div`
   display: flex;
   flex-direction: column;
@@ -685,10 +692,10 @@ const Tetris404: React.FC = () => {
             onTouchStart={() => startRepeatingAction(() => playerMove(-1))}
             onTouchEnd={stopRepeatingAction}
           >
-            <Image src={imgLeft} alt="Tecla A" width={CONTROL_SIZE} height={CONTROL_SIZE} />
+            <ButtonImage src={imgLeft} alt="Tecla A" width={CONTROL_SIZE} height={CONTROL_SIZE} draggable="false" />
           </MobileButton>
           <MobileButton onClick={() => playerRotate()}>
-            <Image src={imgRotate} alt="Tecla W" width={CONTROL_SIZE} height={CONTROL_SIZE} />
+            <ButtonImage src={imgRotate} alt="Tecla W" width={CONTROL_SIZE} height={CONTROL_SIZE} draggable="false" />
           </MobileButton>
           <MobileButton
             onMouseDown={() => startRepeatingAction(() => playerMove(1))}
@@ -696,7 +703,7 @@ const Tetris404: React.FC = () => {
             onTouchStart={() => startRepeatingAction(() => playerMove(1))}
             onTouchEnd={stopRepeatingAction}
           >
-            <Image src={imgRight} alt="Tecla D" width={CONTROL_SIZE} height={CONTROL_SIZE} />
+            <ButtonImage src={imgRight} alt="Tecla D" width={CONTROL_SIZE} height={CONTROL_SIZE} draggable="false" />
           </MobileButton>
           <MobileButton
             onMouseDown={() => startRepeatingAction(() => playerDrop(), 50)}
@@ -704,7 +711,7 @@ const Tetris404: React.FC = () => {
             onTouchStart={() => startRepeatingAction(() => playerDrop(), 50)}
             onTouchEnd={stopRepeatingAction}
           >
-            <Image src={imgDown} alt="Tecla S" width={CONTROL_SIZE} height={CONTROL_SIZE} />
+            <ButtonImage src={imgDown} alt="Tecla S" width={CONTROL_SIZE} height={CONTROL_SIZE} draggable="false" />
           </MobileButton>
         </MobileControls>
       </Game>
