@@ -354,7 +354,7 @@ const Tetris404: React.FC = () => {
   const intervalRef = useRef<number | null>(null);
 
   const startRepeatingAction = useCallback(
-    (action: () => void, delay: number = 250) => {
+    (action: () => void, delay: number = 400) => {
       // Limpa qualquer intervalo existente antes de iniciar um novo
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
