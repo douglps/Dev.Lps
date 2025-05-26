@@ -152,7 +152,7 @@ const NextPieceContainer = styled.div`
   height: 9rem;
   width: 100%;
   padding: 1rem;
-  color: ${(props) => props.theme.colors.letras};
+  color: white;
   background: #353535;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -352,24 +352,36 @@ const Tetris404: React.FC = () => {
   const [showRules, setShowRules] = useState(false);
 
   const intervalRef = useRef<number | null>(null);
+   const timeoutRef = useRef<number | null>(null); 
 
   const startRepeatingAction = useCallback(
-    (action: () => void, delay: number = 800) => {
-      // Limpa qualquer intervalo existente antes de iniciar um novo
+    (action: () => void, initialDelay: number = 200, repeatDelay: number = 100) => {
+      // Limpa qualquer intervalo ou timeout existente para evitar múltiplas execuções
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
-      action(); // Executa a ação imediatamente ao pressionar
-      intervalRef.current = window.setInterval(action, delay);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+
+      // Executa a ação uma vez após um pequeno atraso inicial
+      timeoutRef.current = window.setTimeout(() => {
+        action(); // Executa a ação pela primeira vez
+        // Em seguida, inicia a repetição contínua
+        intervalRef.current = window.setInterval(action, repeatDelay);
+      }, initialDelay); // Atraso inicial antes da primeira execução e do loop
     },
     []
   );
 
-  // Função para parar a repetição de uma ação
   const stopRepeatingAction = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
+    }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
   }, []);
 
@@ -687,9 +699,9 @@ const Tetris404: React.FC = () => {
         />
         <MobileControls>
           <MobileButton
-            onMouseDown={() => startRepeatingAction(() => playerMove(-1))}
+            onMouseDown={() => startRepeatingAction(() => playerMove(-1), 15, 70)} // Atraso inicial, Atraso de repetição
             onMouseUp={stopRepeatingAction}
-            onTouchStart={() => startRepeatingAction(() => playerMove(-1))}
+            onTouchStart={() => startRepeatingAction(() => playerMove(-1), 15, 70)}
             onTouchEnd={stopRepeatingAction}
           >
             <ButtonImage src={imgLeft} alt="Tecla A" width={CONTROL_SIZE} height={CONTROL_SIZE} draggable="false" />
@@ -698,17 +710,17 @@ const Tetris404: React.FC = () => {
             <ButtonImage src={imgRotate} alt="Tecla W" width={CONTROL_SIZE} height={CONTROL_SIZE} draggable="false" />
           </MobileButton>
           <MobileButton
-            onMouseDown={() => startRepeatingAction(() => playerMove(1))}
+            onMouseDown={() => startRepeatingAction(() => playerMove(1), 15, 70)}
             onMouseUp={stopRepeatingAction}
-            onTouchStart={() => startRepeatingAction(() => playerMove(1))}
+            onTouchStart={() => startRepeatingAction(() => playerMove(1), 15, 70)}
             onTouchEnd={stopRepeatingAction}
           >
             <ButtonImage src={imgRight} alt="Tecla D" width={CONTROL_SIZE} height={CONTROL_SIZE} draggable="false" />
           </MobileButton>
           <MobileButton
-            onMouseDown={() => startRepeatingAction(() => playerDrop(), 50)}
+            onMouseDown={() => startRepeatingAction(() => playerDrop(), 0, 50)} // Atraso inicial e de repetição para queda
             onMouseUp={stopRepeatingAction}
-            onTouchStart={() => startRepeatingAction(() => playerDrop(), 50)}
+            onTouchStart={() => startRepeatingAction(() => playerDrop(), 0, 50)}
             onTouchEnd={stopRepeatingAction}
           >
             <ButtonImage src={imgDown} alt="Tecla S" width={CONTROL_SIZE} height={CONTROL_SIZE} draggable="false" />
