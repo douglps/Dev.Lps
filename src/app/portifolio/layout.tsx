@@ -31,7 +31,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://devlps.vercel.app/portifolio",
   },
+   other: {
+    "fb:app_id": "1647306825939965", 
+  },
 };
+
+<meta property="fb:app_id" content="1647306825939965" />
+
 export default function PortfolioLayout({
   children,
 }: {

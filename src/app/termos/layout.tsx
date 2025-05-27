@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://devlps.vercel.app/termos",
   },
+   other: {
+    "fb:app_id": "1647306825939965", 
+  },
 };
 
 export default function TermosLayout({
