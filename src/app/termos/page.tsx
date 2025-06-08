@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import styled from "styled-components";
 import * as S from "@/src/styles/PrivacidadeStyled";
 
@@ -38,7 +39,22 @@ export default function TermoUsoPage() {
   ];
 
   return (
-    <S.ContainerPrivacidade role="region" aria-labelledby="titulo-termos-uso">
+    <>
+    <Script
+            id="hotjar-script" // Um ID único é recomendado
+            strategy="afterInteractive" // Carrega o script após a página ser interativa
+          >
+            {`
+              (function(h,o,t,j,a,r){
+                  h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                  h._hjSettings={hjid:6428713,hjsv:6};
+                  a=o.getElementsByTagName('head')[0];
+                  r=o.createElement('script');r.async=1;
+                  r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                  a.appendChild(r);
+              })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+            `}
+          </Script><S.ContainerPrivacidade role="region" aria-labelledby="titulo-termos-uso">
       <S.PrivacidadeGrid>
         <S.PrivacidadeNavegacao aria-label="Sumário dos termos de uso">
           <ul>
@@ -258,6 +274,6 @@ export default function TermoUsoPage() {
           </p>
         </S.PrivacidadeContainerConteudo>
       </S.PrivacidadeGrid>
-    </S.ContainerPrivacidade>
+    </S.ContainerPrivacidade></>
   );
 }

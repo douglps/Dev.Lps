@@ -25,10 +25,12 @@ import {
   BotaoPlus,
   IconButton,
   TemaButton,
+  IconCoffee,
 } from "../styles/ControlStyled";
 
 // Defina as dimensões padrão para os ícones, ajuste conforme o tamanho real dos seus SVGs
 const ICON_SIZE = 32;
+const ICON_PLUS = 40;
 
 export function Control() {
   const { theme, toggleTheme } = useTheme(); // Usa o hook para acessar o tema e a função de alternar
@@ -39,12 +41,6 @@ export function Control() {
   const handleToggle = () => {
     toggleTheme(); // Chama a função do contexto
   };
-
-  // const scrollToTop = () => {
-  //   if (typeof window !== "undefined") {
-  //     window.scrollTo({ top: 0, behavior: "smooth" });
-  //   }
-  // };
 
   const handlePlusClick = () => {
     setIsOpen((prev) => !prev); // Use o estado anterior para garantir a atualização correta
@@ -70,8 +66,8 @@ export function Control() {
             src={menuIcon}
             alt={isOpen ? "Fechar opções" : "Mais opções"}
             title={isOpen ? "Fechar opções" : "Mais opções"}
-            // width={ICON_SIZE}
-            // height={ICON_SIZE}
+            width={ICON_PLUS}
+            height={ICON_PLUS}
           />
         </BotaoPlus>
 
@@ -103,18 +99,6 @@ export function Control() {
         </IconButton>
 
         <IconButton>
-          <Link href="/cafe" onClick={closeMenu}>
-            <Image
-              src={theme === "dark" ? darkCoffee : lightCoffee}
-              alt="Contribua com um café"
-              title="Contribua com um café"
-              width={ICON_SIZE}
-              height={ICON_SIZE}
-            />
-          </Link>
-        </IconButton>
-
-        <IconButton>
           <Image
             src={theme === "dark" ? darkChat : lightChat}
             alt="Vamos Conversar"
@@ -124,14 +108,22 @@ export function Control() {
             height={ICON_SIZE}
           />
         </IconButton>
+
+        <IconCoffee>
+          <Link href="/cafe" onClick={closeMenu}>
+            <Image
+              src={theme === "dark" ? darkCoffee : lightCoffee}
+              alt="Contribua com um café"
+              title="Contribua com um café"
+              width={ICON_SIZE}
+              height={ICON_SIZE}
+            />
+          </Link>
+        </IconCoffee>
       </Aside>
 
       <div
         className="acima"
-        // onClick={(e) => {
-        //   e.preventDefault();
-        //   scrollToTop();
-        // }}
       >
         <Link href="#">
           <Image

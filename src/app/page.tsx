@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Script from "next/script";
 
 import "@/src/styles/globals.css";
 
@@ -26,6 +27,21 @@ export default function Home() {
     // Note que <html> e <body> não estão aqui, pois estarão no layout do servidor.
     // Você não precisa repetir as classes da fonte aqui se elas estiverem no <html> do Server Component.
     <>
+    <Script
+            id="hotjar-script" // Um ID único é recomendado
+            strategy="afterInteractive" // Carrega o script após a página ser interativa
+          >
+            {`
+              (function(h,o,t,j,a,r){
+                  h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                  h._hjSettings={hjid:6428713,hjsv:6};
+                  a=o.getElementsByTagName('head')[0];
+                  r=o.createElement('script');r.async=1;
+                  r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                  a.appendChild(r);
+              })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+            `}
+          </Script>
       <ThemeInitializer />
       <Hero />
       <Cta />

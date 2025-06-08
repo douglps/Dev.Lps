@@ -1,5 +1,5 @@
 // src/components/ControlStyled.ts
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const Container = styled.div`
   .acima {
@@ -121,6 +121,78 @@ export const IconButton = styled.div`
   }
   a {
     display: flex;
+  }
+`;
+
+const ripple = keyframes`
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+`;
+
+const shake = keyframes`
+  0%, 100% {
+    transform: translateX(0rem) rotate(0deg);
+  }
+  20% {
+    transform: translateX(0rem) rotate(-10deg);
+  }
+  40% {
+    transform: translateX(0rem) rotate(10deg);
+  }
+  60% {
+    transform: translateX(0rem) rotate(-6deg);
+  }
+  80% {
+    transform: translateX(0rem) rotate(6deg);
+  }
+`;
+
+export const IconCoffee = styled.div`
+  position: relative;
+  display: flex;
+  box-shadow: inset 0 0 9rem 30rem #00000080;
+  height: 4rem;
+  width: 4rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% 0 0 50%;
+  transform: translateX(1rem);
+  overflow: hidden;
+  cursor: pointer;
+
+ 
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #11f041;
+    animation: ${ripple} 2s infinite;
+    pointer-events: none;
+  }
+
+  img {
+    background-color: ${props => props.theme.colors.letrasSkills};
+    border-radius: 50%;
+    padding: 0.3rem;
+    transition: transform 0.5s ease-in-out;
+    z-index: 1;
+     &:hover {
+    animation: ${shake} 0.6s;
+  }
+  }
+
+  a {
+    display: flex;
+    z-index: 1;
   }
 `;
 
